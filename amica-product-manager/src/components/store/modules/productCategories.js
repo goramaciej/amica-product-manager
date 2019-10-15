@@ -1,3 +1,6 @@
+//import categories from './categories_obsolete.js/index.js';
+import axios from 'axios';
+
 const state = {
     categories: []
 }
@@ -9,5 +12,33 @@ const mutations = {
 }
 
 const actions = {
-    
+    /*initCategories: ( { commit }) => {
+        commit('SET_CATEGORIES', categories);
+    },*/
+    retrieveCategories ( {commit} ){
+        axios.get('/categories.json')
+                .then( response => {
+                    let arr = Object.values(response.data)[0];
+                    commit('SET_CATEGORIES', arr);
+                })
+                .catch( error => console.log(error));
+    },
+    sendCategories ( {commit}, categories ){
+        axios.post('/categories.json', this.$store.getters.categories)
+            .then( res => console.log(res))
+            .catch( error => console.log(error));
+    }
+}
+
+const getters = {
+    categories: state => {
+        return state.categories;
+    }
+}
+
+export default {
+    state,
+    mutations,
+    actions,
+    getters
 }

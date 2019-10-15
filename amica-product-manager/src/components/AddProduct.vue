@@ -3,56 +3,53 @@
         <h1>Dodaj produkt:</h1>
 
         <div class="row">
-            <div>
-                <div class="form-group">
-                    <input
-                        type="text"
-                        id="productName"
-                        class="form-control"
-                        placeholder="Wprowadź nazwę produktu"
-                        v-model="productData.productName"
-                    />
-                </div>
+            <div class="form-group">
+                <input
+                    type="text"
+                    id="productName"
+                    class="form-control"
+                    placeholder="Wprowadź nazwę produktu"
+                    v-model="productData.productName"
+                />
             </div>
         </div>
         <div class="row">
             <select-category />
         </div>
         <div class="row">
-            <div>
-                <div class="form-group">
-                    <textarea
-                        cols="40" 
-                        rows="5"
-                        type="text"
-                        id="productDescription"
-                        class="form-control"
-                        placeholder="Wprowadź opis produktu"
-                        v-model="productData.description"
-                    ></textarea>
-                </div>
+            <div class="form-group">
+                <textarea
+                    cols="40"
+                    rows="5"
+                    type="text"
+                    id="productDescription"
+                    class="form-control"
+                    placeholder="Wprowadź opis produktu"
+                    v-model="productData.description"
+                ></textarea>
             </div>
         </div>
         <div class="row">
             <add-image @imageadded="addImage" :images="productData.images" />
         </div>
+        <div class="amica-button">START</div>
     </div>
 </template>
 
 <script>
-import addImage from './addProductComponents/AddImage.vue';
-import SelectCategory from './addProductComponents/SelectCategory.vue';
+import addImage from "./addProductComponents/AddImage.vue";
+import SelectCategory from "./addProductComponents/SelectCategory.vue";
 export default {
     data() {
         return {
             productData: {
                 cat: 0,
                 subcat: 0,
-                product_id: 0,
+                product_id: this.randomNumber(),
                 productName: "",
                 description: "",
                 images: []
-            },
+            }
         };
     },
     components: {
@@ -63,12 +60,14 @@ export default {
         addImage(imageurl) {
             this.productData.images.push(imageurl);
         },
+        randomNumber() {
+            return Math.floor(Math.random() * 10000);
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .imagediv {
     display: inline-block;
     margin: 0 10px;
@@ -80,7 +79,7 @@ export default {
     display: block;
     width: 100%;
 }
-textarea{
+textarea {
     resize: none;
 }
 </style>

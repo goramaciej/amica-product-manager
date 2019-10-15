@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import AddProduct from './components/AddProduct.vue';
+import CategoriesManager from './components/categories/CategoriesManager.vue';
+import FeaturesManager from './components/features/FeaturesManager.vue'
+import AddNewFeature from './components/features/AddNewFeature.vue'
 
 Vue.use(Router)
 
@@ -18,6 +21,21 @@ export default new Router({
         path: '/addproduct',
         name: 'addproduct',
         component: AddProduct
+    },
+    {
+        path: '/features_manager',
+        name: 'Zarządzanie funkcjami',
+        component: FeaturesManager
+    },
+    {
+        path: '/add_new_feature',
+        name: 'Dodaj nową funkcję',
+        component: AddNewFeature
+    },
+    {
+        path: '/categories_manager',
+        name: 'CategoriesManager',
+        component: CategoriesManager
     }
     // {
     //   path: '/about',
