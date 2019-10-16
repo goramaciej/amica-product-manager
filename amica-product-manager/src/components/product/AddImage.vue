@@ -1,9 +1,8 @@
 <template>
     <div>
-        <p>Przeciągnij zdjęcia do ramki: </p>
+        <h5>Przeciągnij zdjęcia do ramki: </h5>
         <div
-            id="drop"
-            class="layout-column twelve"            
+            class="drop"  
             @dragover.prevent 
             @drop="onDrop"
         >
@@ -21,8 +20,6 @@ export default {
         images:Array
     },
     methods: {
-        ///var dropbox = document.getElementById('drop');
-        //dropbox.addEventListener('drop', drop, false);
         onDrop(evt){
             evt.stopPropagation();
             evt.preventDefault();
@@ -32,17 +29,6 @@ export default {
             url = rex.exec(imageUrl);
             this.$emit('imageadded', url[1]);
         }
-        /*drop(evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
-            var imageUrl = evt.dataTransfer.getData("text/html");
-
-            var rex = /src="?([^"\s]+)"?\s;
-            var url, res;
-
-            url = rex.exec(imageUrl);
-            alert(url[1]);
-        }*/
     }
 };
 </script>
@@ -51,17 +37,15 @@ export default {
     p {
         text-align: left;
     }
-    #drop {
-        border: 3px dashed black;
-        background-color: #f0efef;
+    .drop {
         width: 100%;
         min-height: 60px;
         display: flex;
+        flex-flow: row wrap;
         justify-content:center;
         align-items: center;
-        flex-wrap: wrap;
-        border-radius: 5px;
     }
+    
     .product-image{
         height: 80px;
         padding: 10px;

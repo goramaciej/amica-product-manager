@@ -65,8 +65,8 @@ h3 {
 .row-centered {
     text-align: center;
 }
-.row {
-    //margin-left: -10px;
-    //margin-right: -10px;
-}
+// .row {
+//     //margin-left: -10px;
+//     //margin-right: -10px;
+// }
 </style>
