@@ -58,4 +58,9 @@ export default {
     justify-content:center;
     align-items: center;
 }
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: rgba(227, 19, 41, 0.8);
+    box-shadow: 0 1px 1px rgba(227, 19, 41, 0.075) inset, 0 0 8px rgba(227, 19, 41, 0.6);
+    outline: 0 none;
+}
 </style>

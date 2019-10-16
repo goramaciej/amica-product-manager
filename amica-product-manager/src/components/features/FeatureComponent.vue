@@ -26,7 +26,7 @@ export default {
         flex: 1 0 320px;
     }
     @media screen and (min-width: 600px) {
-        flex-basis: 220px;
+        flex-basis: 300px;
         padding: 40px 40px 0 25px;
     }
 }

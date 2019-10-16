@@ -26,9 +26,9 @@ const actions = {
     sendFeatures( {commit} ){
         console.log("send features");
         console.log(state.features);
-        /*axios.post('/features.json', this.getters.features)
+        axios.post('/features.json', this.getters.features)
             .then( res => console.log(res))
-            .catch( error => console.log(error));*/
+            .catch( error => console.log(error));
     },
     addFeature( {commit}, feature){
         commit('ADD_FEATURE', feature);
