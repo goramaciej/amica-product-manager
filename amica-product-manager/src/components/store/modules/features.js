@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const state = {
-    features: []
+    features: [],
 }
 
 const mutations = {
@@ -15,7 +15,6 @@ const mutations = {
 }
 const actions = {
     retrieveFeatures ( {commit} ){
-        console.log("retrieveFeatures");
         axios.get('/features.json')
                 .then( response => {
                     const arr = Object.values(response.data);
@@ -37,7 +36,7 @@ const actions = {
 const getters = {
     features: state => {
         return state.features;
-    }
+    },
 }
 
 export default {

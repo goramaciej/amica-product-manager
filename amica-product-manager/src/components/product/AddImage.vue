@@ -6,8 +6,11 @@
             @dragover.prevent 
             @drop="onDrop"
         >
-            <div v-for="(url, key, index) in images" :key="index">
-                <img class="product-image" :src="url" />
+            <img v-for="(url, key, index) in images" 
+                    :key="index"
+                    class="product-image"
+                    :src="url" />
+                <!-- <img class="product-image" :src="url" /> -->
             </div>
         </div>
     </div>
@@ -48,7 +51,7 @@ export default {
     
     .product-image{
         height: 80px;
-        padding: 10px;
+        padding: 0px;
         background-color: white;
         margin: 10px;
         border: 1px solid black;

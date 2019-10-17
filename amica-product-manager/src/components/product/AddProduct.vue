@@ -24,13 +24,15 @@
             ></textarea>
         </div>
         <add-image @imageadded="addImage" :images="productData.images" />
-        <div class="amica-button">START</div>
+        <select-features />
+        <div class="amica-button" @click="showProductData">START</div>
     </div>
 </template>
 
 <script>
-import addImage from "./AddImage.vue";
-import SelectCategory from "./SelectCategory.vue";
+import addImage from './AddImage.vue';
+import SelectCategory from './SelectCategory.vue';
+import SelectFeatures from './selectFeatures.vue'
 export default {
     data() {
         return {
@@ -40,22 +42,36 @@ export default {
                 product_id: this.randomNumber(),
                 productName: "",
                 description: "",
-                images: []
+                images: [],
+                dimensions: {
+                    width: 0,
+                    height: 0,
+                    depth: 0
+                },
+                energyClass: "",
+                color: "",
+                power: 0
             }
         };
     },
+
     components: {
         addImage,
-        SelectCategory
+        SelectCategory,
+        SelectFeatures
     },
     methods: {
         addImage(imageurl) {
             this.productData.images.push(imageurl);
         },
         randomNumber() {
-            return Math.floor(Math.random() * 10000);
+            return Math.floor(Math.random() * 100000);
+        },
+        showProductData(){
+            console.log("ed");
         }
-    }
+    },
+    created() {}
 };
 </script>
 

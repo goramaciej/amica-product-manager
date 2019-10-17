@@ -12,13 +12,10 @@
             <option selected disabled> {{ subcategoriesDisabledText}} </option>
             <option v-for="(item, key, index) in subCategories" v-bind:key="index">{{ item.name }}</option>
         </select>
-        <div class="amica-button" @click="addData">Add data</div>
-        <div class="amica-button" @click="retrieveData">Take data</div>
     </div>
 </template>
 
 <script>
-//import axios from 'axios';
 
 export default {
     name: "SelectCategory",
