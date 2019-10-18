@@ -2,7 +2,7 @@
     <div>
         <h5>Przeciągnij zdjęcia do ramki: </h5>
         <div
-            class="drop"  
+            class="drop dashed-background"  
             @dragover.prevent 
             @drop="onDrop"
         >

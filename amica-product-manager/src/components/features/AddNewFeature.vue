@@ -23,10 +23,10 @@
         </div>
         <h5>Przeciągnij z innego okna zdjęcie obrazujące funkcję oraz jej ikonę:</h5>
         <div class="imagePlaceholders">            
-            <div id="drop2" class="drop" @dragover.prevent @drop="imageDrop">
+            <div id="drop2" class="drop dashed-background" @dragover.prevent @drop="imageDrop">
                 <img class="product-image" :src="feature.imageURL" />
             </div>
-            <div id="drop1" class="drop" @dragover.prevent @drop="iconDrop">
+            <div id="drop1" class="drop dashed-background" @dragover.prevent @drop="iconDrop">
                 <img class="product-image" :src="feature.iconURL" />
             </div>
             <!-- <div v-for="(url, key, index) in images" :key="index">

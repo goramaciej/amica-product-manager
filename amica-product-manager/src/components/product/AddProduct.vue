@@ -24,7 +24,7 @@
             ></textarea>
         </div>
         <add-image @imageadded="addImage" :images="productData.images" />
-        <select-features />
+        <select-features @featuresChange="featuresChange"/>
         <div class="amica-button" @click="showProductData">START</div>
     </div>
 </template>
@@ -32,7 +32,7 @@
 <script>
 import addImage from './AddImage.vue';
 import SelectCategory from './SelectCategory.vue';
-import SelectFeatures from './selectFeatures.vue'
+import SelectFeatures from './FeaturesManager.vue'
 export default {
     data() {
         return {
@@ -61,6 +61,9 @@ export default {
         SelectFeatures
     },
     methods: {
+        featuresChange(featuresIdsArray){
+            console.log(featuresIdsArray);
+        },
         addImage(imageurl) {
             this.productData.images.push(imageurl);
         },

@@ -2,7 +2,7 @@
     <div class="features-manager" id="features-manager-container" @mousemove="mouseContainerMoving">
         <div class="c-tooltip" id="features-tooltip">Blokada rodzicielska</div>
         <div class="col" id="containerLeft">
-            <draggable class="list-group" :list="features" group="people" @change="log" id="bcga">
+            <draggable class="list-group dashed-background" :list="features" group="features">
                 <div
                     class="feature-item"
                     v-for="(element, index) in features"
@@ -22,7 +22,7 @@
         </div>
 
         <div class="col" id="containerRight">
-            <draggable class="list-group" :list="selectedItems" group="people" @change="log">
+            <draggable class="list-group dashed-background" :list="selectedItems" group="features" @change="featuresListChanged">
                 <div
                     class="feature-item"
                     v-for="(element, index) in selectedItems"
@@ -72,8 +72,9 @@ export default {
     },
 
     methods: {
-        log: function(ev){
-
+        featuresListChanged: function(ev){
+            // immediately emit data to refresh "product data" in addProduct
+            this.$emit('featuresChange', this.selectedItems.map(({ id }) => id));
         },
         mouseContainerMoving: function(ev) {
             if (!this.movedAfterDrag) this.movedAfterDrag = true;
@@ -109,10 +110,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../scss/tooltip.scss";
+@import "../../scss/amicaform.scss";
 
 .features-manager {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 .feature-item {
     width: 60px;
@@ -126,14 +128,16 @@ export default {
 }
 .col {
     position: relative;
-    width: 40%;
+    width: 48%;
 }
 .list-group {
-    background-color: yellow;
-    min-height: 1800px;
+    min-height: 300px;
     display: flex;
     justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
     flex-flow: row wrap;
+    padding: 10px;
 }
 .list-group-item,
 .feature-item {

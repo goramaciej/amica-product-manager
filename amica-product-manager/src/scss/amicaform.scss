@@ -18,14 +18,16 @@ $amicared: #e31329;
     h5 {
         font-weight: bold;
     }
-
-    .drop {
-        display: block;
-        vertical-align: top;
+    .dashed-background{
         border: 1px dashed rgb(110, 110, 110);
         background-color: #dfdede;
         border-radius: 10px;
         overflow: hidden;
+    }
+
+    .drop {
+        display: block;
+        vertical-align: top;
         margin: 0 auto;
         @media screen and (min-width: $break-small) {
             display: inline-block;
