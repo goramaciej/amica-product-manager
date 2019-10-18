@@ -21,12 +21,18 @@ export default {
     },
     computed: {
         features(){
-            return this.$store.getters.features;
+            //use copy, not reference
+            return JSON.parse(JSON.stringify(this.$store.getters.features));
         }
     },
+    watch: {
+        features(val){
+            console.log("features has changed");
+        }
+    }
 };
 </script>
-    
+
 <style lang="scss" scoped>
 .featuresFrame {
     width: 50%;

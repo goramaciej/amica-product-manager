@@ -35,7 +35,12 @@ const actions = {
 }
 const getters = {
     features: state => {
-        return state.features;
+        // return copy of features, not reference
+        //console.log("ch: "+state.features.length);
+        let parsed = JSON.parse(JSON.stringify(state.features));
+        console.log(parsed.length);
+        return parsed;
+        //return state.features;
     },
 }
 

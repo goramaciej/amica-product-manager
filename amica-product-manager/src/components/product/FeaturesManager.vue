@@ -2,7 +2,7 @@
     <div class="features-manager" id="features-manager-container" @mousemove="mouseContainerMoving">
         <div class="c-tooltip" id="features-tooltip">Blokada rodzicielska</div>
         <div class="col" id="containerLeft">
-            <draggable class="list-group dashed-background" :list="features" group="features">
+            <draggable class="list-group dashed-background" group="features">
                 <div
                     class="feature-item"
                     v-for="(element, index) in features"
@@ -14,6 +14,7 @@
                     @mousemove="mouseMoving"
                     @mousedown="mouseLeave"
                     @dragstart="startDrag"
+                    
                     @dragend="endDrag"
                 >
                     <img :src="element.iconURL" />
