@@ -1,7 +1,6 @@
 <template>
     <div class="amicaform">
         <h4>Dodaj nowy produkt:</h4>
-
         <div class="form-group">
             <input
                 type="text"
@@ -11,7 +10,7 @@
                 v-model="productData.productName"
             />
         </div>
-        <select-category />
+        <select-category @change="categorySelected" :key="'a' + componentKey"/>
         <div class="form-group">
             <textarea
                 cols="40"
@@ -23,21 +22,63 @@
                 v-model="productData.description"
             ></textarea>
         </div>
-        <add-image @imageadded="addImage" :images="productData.images" />
-        <select-features @featuresChange="featuresChange"/>
-        <div class="amica-button" @click="addProduct">ADD</div>
-        <div class="amica-button" @click="showProductData">SHOW_DATA</div>
+        <add-image @imageadded="addImage" :images="productData.images" :key="'b' + componentKey"/>
+        <select-features @featuresChange="featuresChange" :key="'c' + componentKey"/>
+        <div class="amica-button" @click="addProduct">Dodaj produkt</div>
+        <div class="amica-button" @click="clear">Wyczyść</div>
+        <div class="amica-button" @click="saveProducts">Zapisz</div>
     </div>
 </template>
 
 <script>
 import addImage from './AddImage.vue';
 import SelectCategory from './SelectCategory.vue';
-import SelectFeatures from './FeaturesManager.vue'
+import SelectFeatures from './FeaturesManager.vue';
+//import productData from './productData.js'
 export default {
     data() {
         return {
             productData: {
+                
+            },
+            componentKey: 0,
+        };
+    },
+
+    components: {
+        addImage,
+        SelectCategory,
+        SelectFeatures
+    },
+    methods: {
+        categorySelected(category, subcategory=0){
+            console.log("category selected: " + category +" : " + subcategory);
+            this.productData.cat = category;
+            this.productData.subcat = subcategory
+        },
+        addImage(imageurl) {
+            this.productData.images.push(imageurl);
+        },
+        featuresChange(featuresIdsArray){
+            this.productData.features = featuresIdsArray;
+        },
+        randomNumber() {
+            return Math.floor(Math.random() * 100000);
+        },
+
+        addProduct(){
+            this.$store.commit('ADD_PRODUCT', this.productData);
+        },
+        saveProducts(){
+            this.$store.dispatch('sendProducts');
+        },
+        clear(){
+            this.initData();
+            this.componentKey++;
+            window.scrollTo(0,0);
+        },
+        initData(){
+            this.productData = {
                 cat: 0,
                 subcat: 0,
                 product_id: this.randomNumber(),
@@ -54,34 +95,11 @@ export default {
                 color: "",
                 power: 0
             }
-        };
-    },
-
-    components: {
-        addImage,
-        SelectCategory,
-        SelectFeatures
-    },
-    methods: {
-        featuresChange(featuresIdsArray){
-            console.log("FFA: "+featuresIdsArray);
-            this.productData.features = featuresIdsArray;
-        },
-        addImage(imageurl) {
-            this.productData.images.push(imageurl);
-        },
-        randomNumber() {
-            return Math.floor(Math.random() * 100000);
-        },
-        addProduct(){
-            this.$store.commit('ADD_PRODUCT', this.productData);
-        },
-        showProductData(){
-            console.dir (this.productData);
-            //console.log(this.$store.getters.products);
         }
     },
-    created() {}
+    created(){
+        this.initData ();
+    },
 };
 </script>
 

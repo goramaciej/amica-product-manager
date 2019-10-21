@@ -23,6 +23,7 @@ export default {
         return {
             categoryName: "Wybierz kategorię produktu",
             selectedCategory: 0,
+            selectedSubcategory: 0,
             subcategoriesDisabledText: "Najpierw wybierz kategorię produktu",
             subcategoryDisabled: true,
             subCategories: null,
@@ -36,9 +37,9 @@ export default {
     },
     methods: {
         catSelected(ev){
-            //console.dir(categories.find(ev.target.value));
             this.selectedCategory = this.categories.find(el => el.name == ev.target.value).id;
             this.setSubcategories(this.subCategories = this.categories.find(el => el.name == ev.target.value).subcats);
+            this.$emit('change', this.selectedCategory);
         },
         
         setSubcategories(subcatsArray){
@@ -53,24 +54,9 @@ export default {
             }
         },
         subcatSelected(ev){
-            console.log("subcat selected");
-        },
-        addData(){
-            
-            //console.log(this.$store.getters.categories);
-            /*axios.post('/categories.json', this.$store.getters.categories)
-                .then( res => console.log(res))
-                .catch( error => console.log(error));*/
-            
-        },
-        retrieveData(){
-            console.log(this.$store.getters.categories);
-            /*axios.get('/categories.json')
-                .then( response => {
-                    let arr = Object.values(response.data)[0];
-                    console.dir(arr);
-                })
-                .catch( error => console.log(error));*/
+            /*console.log("subcat selected: " + ev.target.value + " : "+this.subCategories);*/
+            this.selectedSubcategory = this.subCategories.find(el => el.name == ev.target.value).id;
+            this.$emit('change', this.selectedCategory, this.selectedSubcategory);
         },
     }
 };

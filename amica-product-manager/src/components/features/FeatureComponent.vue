@@ -29,15 +29,21 @@ export default {
         flex-basis: 300px;
         padding: 40px 40px 0 25px;
     }
+    .feature-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        width: 25%;
+        height: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.92, 1.3);
+    }
+    &:hover .feature-icon{
+        transform: scale(1.1);
+    }
 }
-.feature-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 25%;
-    height: auto;
-}
+
 img {
     vertical-align: middle;
     max-width: 100%;

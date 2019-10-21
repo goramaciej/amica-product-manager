@@ -1,8 +1,8 @@
 <template>
     <div class="featuresManager">
-        <router-link to="/add_new_feature" class="amica-button">Dodaj nową funkcję</router-link>
+        <router-link tag="li" to="/add_new_feature" class="amica-button">Dodaj nową funkcję</router-link>
         <div class="amica-button" @click="saveOnServer">Zapisz wszystkie funkcje</div>
-        <div class="mrt">
+        <div class="features-overview">
             <feature-component v-for="(item, index) in features" :key="index" :feature="item"/>
         </div>
     </div>
@@ -32,12 +32,12 @@ export default {
 </script>
 
 <style lang="scss">
-    .mrt{
+    .features-overview{
         // background-color: pink;
         display:flex;
         flex-wrap: wrap;
         justify-content:center;
-        margin-left: 10px;
+        margin: 20px 0 30px 20px;
         // align-items: flex-start;
     }
 </style>

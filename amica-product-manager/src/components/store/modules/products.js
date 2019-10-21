@@ -15,18 +15,18 @@ const mutations = {
 
 const actions = {
     retrieveProducts( {commit} ){
-        /*axios.get('/product.json')
+        axios.get('/product.json')
                 .then( response => {
                     let arr = Object.values(response.data)[0];
                     commit('SET_PRODUCTS', arr);
                 })
-                .catch( error => console.log(error));*/
+                .catch( error => console.log(error));
     },
-    /*sendProducts( {commit}, products ){
-        axios.post('/products.json', this.$store.getters.products)
+    sendProducts( {commit} ){
+        axios.post('/products.json', this.getters.products)
             .then( res => console.log("sendproducts: "+ res) )
             .catch( error => console.log(error));
-    }*/
+    }
 }
 const getters = {
     products: state => {

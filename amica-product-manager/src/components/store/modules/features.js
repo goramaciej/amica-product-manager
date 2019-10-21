@@ -23,8 +23,6 @@ const actions = {
                 .catch( error => console.log(error));
     },
     sendFeatures( {commit} ){
-        console.log("send features");
-        console.log(state.features);
         axios.post('/features.json', this.getters.features)
             .then( res => console.log(res))
             .catch( error => console.log(error));
@@ -36,9 +34,7 @@ const actions = {
 const getters = {
     features: state => {
         // return copy of features, not reference
-        //console.log("ch: "+state.features.length);
         let parsed = JSON.parse(JSON.stringify(state.features));
-        console.log(parsed.length);
         return parsed;
         //return state.features;
     },

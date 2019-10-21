@@ -1,6 +1,12 @@
 $break-small: 520px;
 $break-big: 850px;
-$amicared: #e31329;
+$amicared: #ed2436;
+
+.top-spacer{
+    margin-top: 0px;
+    margin-bottom: 60px;
+    opacity: 0;
+}
 
 .amicaform {
     margin: 0 20px;
