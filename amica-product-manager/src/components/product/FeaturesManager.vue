@@ -2,10 +2,11 @@
     <div class="features-manager" id="features-manager-container" @mousemove="mouseContainerMoving">
         <div class="c-tooltip" id="features-tooltip">Blokada rodzicielska</div>
         <div class="col" id="containerLeft">
-            <draggable class="list-group dashed-background" group="features">
+            <draggable class="list-group dashed-background" group="features"
+            :list="itemsFromStore">
                 <div
                     class="feature-item"
-                    v-for="(element, index) in features"
+                    v-for="(element, index) in itemsFromStore"
                     :key="index"
                     :data-tooltip="element.title"
                     data-tooltiplocation="left"
@@ -13,8 +14,7 @@
                     @mouseleave="mouseLeave"
                     @mousemove="mouseMoving"
                     @mousedown="mouseLeave"
-                    @dragstart="startDrag"
-                    
+                    @dragstart="startDrag"                    
                     @dragend="endDrag"
                 >
                     <img :src="element.iconURL" />
@@ -23,7 +23,8 @@
         </div>
 
         <div class="col" id="containerRight">
-            <draggable class="list-group dashed-background" :list="selectedItems" group="features" @change="featuresListChanged">
+            <draggable class="list-group dashed-background" group="features" 
+            :list="selectedItems" @change="featuresListChanged">
                 <div
                     class="feature-item"
                     v-for="(element, index) in selectedItems"
@@ -63,8 +64,9 @@ export default {
         };
     },
     computed: {
-        features() {
-            return this.$store.getters.features;
+        itemsFromStore() {
+            let items = JSON.parse(JSON.stringify(this.$store.getters.features));
+            return items;
         }
     },
     mounted() {
@@ -75,9 +77,10 @@ export default {
     methods: {
         featuresListChanged: function(ev){
             // immediately emit data to refresh "product data" in addProduct
-            this.$emit('featuresChange', this.selectedItems.map(({ id }) => id));
+            let featuresArr = this.selectedItems.map(({ id }) => id)
+            this.$emit('featuresChange', featuresArr);
         },
-        mouseContainerMoving: function(ev) {
+        mouseContainerMoving(ev) {
             if (!this.movedAfterDrag) this.movedAfterDrag = true;
         },
         mouseEnter(ev) {

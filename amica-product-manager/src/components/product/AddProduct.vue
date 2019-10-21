@@ -25,7 +25,8 @@
         </div>
         <add-image @imageadded="addImage" :images="productData.images" />
         <select-features @featuresChange="featuresChange"/>
-        <div class="amica-button" @click="showProductData">START</div>
+        <div class="amica-button" @click="addProduct">ADD</div>
+        <div class="amica-button" @click="showProductData">SHOW_DATA</div>
     </div>
 </template>
 
@@ -43,6 +44,7 @@ export default {
                 productName: "",
                 description: "",
                 images: [],
+                features: [],
                 dimensions: {
                     width: 0,
                     height: 0,
@@ -62,7 +64,8 @@ export default {
     },
     methods: {
         featuresChange(featuresIdsArray){
-            console.log(featuresIdsArray);
+            console.log("FFA: "+featuresIdsArray);
+            this.productData.features = featuresIdsArray;
         },
         addImage(imageurl) {
             this.productData.images.push(imageurl);
@@ -70,8 +73,12 @@ export default {
         randomNumber() {
             return Math.floor(Math.random() * 100000);
         },
+        addProduct(){
+            this.$store.commit('ADD_PRODUCT', this.productData);
+        },
         showProductData(){
-            console.log("ed");
+            console.dir (this.productData);
+            //console.log(this.$store.getters.products);
         }
     },
     created() {}
