@@ -10,7 +10,9 @@
                 v-model="productData.productName"
             />
         </div>
+        <h5>Wybierz kategorię i podkategorię produktu:</h5>
         <select-category @change="categorySelected" :key="'a' + componentKey"/>
+        <h5>Dodaj opis produktu:</h5>
         <div class="form-group">
             <textarea
                 cols="40"
@@ -22,7 +24,9 @@
                 v-model="productData.description"
             ></textarea>
         </div>
+        <h5>Dodaj zdjęcia produktu przeciągając je z innego okna przeglądarki:</h5>
         <add-image @imageadded="addImage" :images="productData.images" :key="'b' + componentKey"/>
+        <h5>Przeciągnij do prawej ramki funkcje produktu:</h5>
         <select-features @featuresChange="featuresChange" :key="'c' + componentKey"/>
         <div class="amica-button" @click="addProduct">Dodaj produkt</div>
         <div class="amica-button" @click="clear">Wyczyść</div>
@@ -31,9 +35,9 @@
 </template>
 
 <script>
-import addImage from './AddImage.vue';
-import SelectCategory from './SelectCategory.vue';
-import SelectFeatures from './FeaturesManager.vue';
+import addImage from '../components/product/addImage.vue';
+import SelectCategory from '../components/product/categoriesSelector.vue';
+import SelectFeatures from '../components/product/featuresSelector.vue';
 //import productData from './productData.js'
 export default {
     data() {
@@ -104,7 +108,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../scss/amicaform.scss";
+@import "../scss/amicaform.scss";
 .imagediv {
     display: inline-block;
     margin: 0 10px;

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import featureComponent from "./FeatureComponent.vue";
+import featureComponent from "../components/features/FeatureComponent.vue";
 export default {
     name: "featuresManager",
     data() {

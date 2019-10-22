@@ -18,7 +18,7 @@
 <script>
 
 export default {
-    name: "SelectCategory",
+    name: "categoriesSelector",
     data() {
         return {
             categoryName: "Wybierz kategorię produktu",

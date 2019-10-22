@@ -1,6 +1,4 @@
 <template>
-    <div>
-        <h5>Przeciągnij zdjęcia do ramki: </h5>
         <div
             class="drop dashed-background"  
             @dragover.prevent 
@@ -13,7 +11,7 @@
                 <!-- <img class="product-image" :src="url" /> -->
             </div>
         </div>
-    </div>
+
 </template>
 
 <script>

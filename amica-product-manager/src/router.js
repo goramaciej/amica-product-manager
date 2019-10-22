@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import AddProduct from './components/product/AddProduct.vue';
-import CategoriesManager from './components/categories/CategoriesManager.vue';
-import FeaturesManager from './components/features/FeaturesManager.vue';
-import AddNewFeature from './components/features/AddNewFeature.vue';
+import AddProduct from './views/AddProduct.vue';
+import CategoriesManager from './views/CategoriesManager.vue';
+import FeaturesManager from './views/FeaturesManager.vue';
+import AddNewFeature from './views/AddNewFeature.vue';
 import Product from './views/Product.vue';
 
 Vue.use(Router)
@@ -16,9 +16,6 @@ export default new Router({
     },
     routes: [
         {
-            /*path: '/',
-            name: 'home',
-            component: Home*/
             path: '/addproduct',
             name: 'addproduct',
             component: AddProduct

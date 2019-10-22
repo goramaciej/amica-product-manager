@@ -108,7 +108,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../scss/tooltip.scss";
+@import "../scss/tooltip.scss";
 
 .features-manager {
     display: flex;
