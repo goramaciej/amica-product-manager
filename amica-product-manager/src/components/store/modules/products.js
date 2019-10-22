@@ -6,6 +6,7 @@ const state = {
 
 const mutations = {
     'SET_PRODUCTS' (state, products){
+        console.log("set: "+products);
         state.products = products;
     },
     'ADD_PRODUCT' (state, product){
@@ -15,7 +16,7 @@ const mutations = {
 
 const actions = {
     retrieveProducts( {commit} ){
-        axios.get('/product.json')
+        axios.get('/products.json')
                 .then( response => {
                     let arr = Object.values(response.data)[0];
                     commit('SET_PRODUCTS', arr);

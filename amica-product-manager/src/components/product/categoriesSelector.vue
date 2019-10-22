@@ -54,7 +54,6 @@ export default {
             }
         },
         subcatSelected(ev){
-            /*console.log("subcat selected: " + ev.target.value + " : "+this.subCategories);*/
             this.selectedSubcategory = this.subCategories.find(el => el.name == ev.target.value).id;
             this.$emit('change', this.selectedCategory, this.selectedSubcategory);
         },

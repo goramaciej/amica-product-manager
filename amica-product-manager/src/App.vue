@@ -3,7 +3,7 @@
         <navbar />
         <div class="top-spacer">A</div>
         <transition name="fade" mode="out-in">
-            <router-view />
+            <router-view></router-view>
         </transition>
     </div>
 </template>
@@ -11,9 +11,12 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 export default {
+      
+
     created() {
-        this.$store.dispatch("retrieveCategories");
-        this.$store.dispatch("retrieveFeatures");
+        this.$store.dispatch('retrieveCategories');
+        this.$store.dispatch('retrieveFeatures');
+        this.$store.dispatch('retrieveProducts');
     },
     components: {
         Navbar

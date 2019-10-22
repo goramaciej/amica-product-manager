@@ -2,10 +2,11 @@
     <header :class="{ 'header--hidden': !showNavbar }">
         <img src="../images/amica-logo.png" alt="logo-amica" />
         <nav>
-            <router-link tag="li" to="/">Home</router-link>
-            <router-link tag="li" to="/addproduct">Dodaj nowy produkt</router-link>
-            <router-link tag="li" to="/categories_manager">Zarządzanie kategoriami</router-link>
-            <router-link tag="li" to="/features_manager">Zarządzanie funkcjami</router-link>
+            <router-link tag="li" :class="{'independent-link': productsInRouter}" to="/products">Produkty</router-link>
+            <router-link tag="li" to="/products/addproduct">Dodaj nowy produkt</router-link>
+            <!-- <router-link tag="li" to="/categories_manager">Zarządzanie kategoriami</router-link> -->
+            <router-link tag="li" to="/features-manager" 
+            :class="{'independent-link': featuresInRouter}">Zarządzanie funkcjami</router-link>
         </nav>
     </header>
 </template>
@@ -16,7 +17,9 @@ export default {
         return {
             showNavbar: true,
             lastScrollPosition: 0,
-            headerHeight: 80
+            headerHeight: 80,
+            productsInRouter: false,
+            featuresInRouter: false
         };
     },
     methods: {
@@ -34,13 +37,24 @@ export default {
                 currentScrollPosition < this.headerHeight;
             // Set the current scroll position as the last scroll position
             this.lastScrollPosition = currentScrollPosition;
+        },
+        checkRouter(){
+            this.productsInRouter = this.$route.path.includes('products') && !this.$route.path.includes('addproduct');
+            this.featuresInRouter = this.$route.path.includes('features');
         }
+
     },
     mounted() {
         window.addEventListener("scroll", this.onScroll);
+        this.checkRouter();
     },
     beforeDestroy() {
         window.removeEventListener("scroll", this.onScroll);
+    },
+    watch: {
+        '$route' (to, from) {
+            this.checkRouter();
+        }
     }
 };
 </script>
@@ -71,7 +85,6 @@ nav {
         position: relative;
         cursor: pointer;
         list-style-type: none;
-        // padding: 10px;
         margin: 15px;
         font-family: "Lato";
         text-transform: uppercase;
@@ -90,7 +103,7 @@ nav {
             transition: width 0.3s ease 0s, left 0.3s ease 0s;
             width: 0;
         }
-        &:hover:after, &.router-link-exact-active:after { 
+        &:hover:after, &.router-link-exact-active:after, &.independent-link:after { 
             width: 100%; 
             left: 0; 
         }
