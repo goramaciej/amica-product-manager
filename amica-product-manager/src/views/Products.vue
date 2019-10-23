@@ -1,6 +1,6 @@
 <template>
     <div class="products-overview">
-        <product-item v-for="(product, key, index) in products" :key="index" :product="product"></product-item>
+        <product-item v-for="(product, key, index) in products" :key="index" :product="product" :classBig="itemsBig"></product-item>
         <!-- <router-view></router-view> -->
     </div>
 </template>
@@ -10,7 +10,9 @@ import productItem from '../components/product/productItem.vue';
 export default {
     name: "Products",
     data() {
-        return {};
+        return {
+            itemsBig: true
+        };
     },
     components: {
         productItem,
@@ -28,7 +30,6 @@ export default {
 .products-overview{
     display: flex;
     flex-flow: row wrap;
-    margin: -12px;
     justify-content: space-evenly;
 }
 </style>

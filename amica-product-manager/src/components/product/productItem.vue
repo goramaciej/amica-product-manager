@@ -1,7 +1,6 @@
 <template>
-    <div class="product-item">
+    <div class="product-item" :class="{ productItemBig: classBig }">
         <!-- <img :src="product.images[0]" /> -->
-        <!-- Zdzicho: {{ product.productName }} -->
         
         <img :src="product.images[0]" :alt="product.productName" />
         <loader />
@@ -14,6 +13,7 @@ import Loader from '../Loader.vue';
         name: 'productItem',
         props: {
             'product':Object,
+            'classBig':Boolean
         },
         components: {
             Loader
@@ -22,12 +22,15 @@ import Loader from '../Loader.vue';
 </script>
 
 <style lang="scss" scoped>
+.product-item-big {
+    transform: scale(2);
+}
 .product-item{
     position: relative;
     overflow: hidden;
     margin: 12px;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
     p{
         color: red;
@@ -39,13 +42,15 @@ import Loader from '../Loader.vue';
         left: -2px;
         top: -4px;
         object-fit: cover;
-        width: 208px;
-        height: 208px;
+        width: 104%;
+        height: 104%;
     }
     &:hover img{
         transform: scale(1.05);
     }
-    
-
+}
+.product-item-big{
+    width: 200px;
+    height: 200px;
 }
 </style>
