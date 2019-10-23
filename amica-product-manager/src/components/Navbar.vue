@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/amicaform.scss";
+@import "../scss/variables.scss";
 header {
     height: 60px;
     width: 100%;

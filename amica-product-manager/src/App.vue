@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./scss/amicaform.scss";
 #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -41,9 +42,6 @@ export default {
             color: #42b983;
         }
     }
-}
-a:hover {
-    font-color: yellow !important;
 }
 
 .amica-button {

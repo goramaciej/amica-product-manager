@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/amicaform.scss";
+@import "../scss/variables.scss";
 
 .imagePlaceholders{
     text-align: center;

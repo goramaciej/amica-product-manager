@@ -28,16 +28,16 @@
         <add-image @imageadded="addImage" :images="productData.images" :key="'b' + componentKey"/>
         <h5>Przeciągnij do prawej ramki funkcje produktu:</h5>
         <select-features @featuresChange="featuresChange" :key="'c' + componentKey"/>
-        <div class="amica-button" @click="addProduct">Dodaj produkt</div>
-        <div class="amica-button" @click="clear">Wyczyść</div>
-        <div class="amica-button" @click="saveProducts">Zapisz</div>
+        <div class="buttons">
+            <div class="amica-button" @click="saveProduct">Zapisz</div>
+        </div>
     </div>
 </template>
 
 <script>
-import addImage from '../components/product/addImage.vue';
-import SelectCategory from '../components/product/categoriesSelector.vue';
-import SelectFeatures from '../components/product/featuresSelector.vue';
+import addImage from '../components/product/addImageComponent.vue';
+import selectCategory from '../components/product/categoriesSelector.vue';
+import selectFeatures from '../components/product/featuresSelector.vue';
 //import productData from './productData.js'
 export default {
     data() {
@@ -51,8 +51,8 @@ export default {
 
     components: {
         addImage,
-        SelectCategory,
-        SelectFeatures
+        selectCategory,
+        selectFeatures
     },
     methods: {
         categorySelected(category, subcategory=0){
@@ -73,8 +73,10 @@ export default {
         addProduct(){
             this.$store.commit('ADD_PRODUCT', this.productData);
         },
-        saveProducts(){
+        saveProduct(){
+            this.$store.commit('ADD_PRODUCT', this.productData);
             this.$store.dispatch('sendProducts');
+            this.clear();
         },
         clear(){
             this.initData();
@@ -107,8 +109,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "../scss/amicaform.scss";
+<style lang="scss" scoped>
 .imagediv {
     display: inline-block;
     margin: 0 10px;
@@ -122,5 +123,9 @@ export default {
 }
 textarea {
     resize: none;
+}
+.buttons{
+    text-align: right;
+    margin: 20px 0;
 }
 </style>

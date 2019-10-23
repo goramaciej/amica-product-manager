@@ -10,7 +10,6 @@
                     :src="url" />
                 <!-- <img class="product-image" :src="url" /> -->
             </div>
-        </div>
 
 </template>
 

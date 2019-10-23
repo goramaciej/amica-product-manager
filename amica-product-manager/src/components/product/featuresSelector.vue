@@ -114,7 +114,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../../scss/tooltip.scss";
-@import "../../scss/amicaform.scss";
+@import "../../scss/variables.scss";
 
 .features-manager {
     display: flex;
@@ -135,7 +135,8 @@ export default {
     width: 48%;
 }
 .list-group {
-    min-height: 300px;
+    min-height: 500px;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-content: flex-start;

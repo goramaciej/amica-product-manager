@@ -6,7 +6,7 @@ const state = {
 
 const mutations = {
     'SET_PRODUCTS' (state, products){
-        console.log("set: "+products);
+        //console.log("set: "+products);
         state.products = products;
     },
     'ADD_PRODUCT' (state, product){
@@ -18,14 +18,16 @@ const actions = {
     retrieveProducts( {commit} ){
         axios.get('/products.json')
                 .then( response => {
-                    let arr = Object.values(response.data)[0];
-                    commit('SET_PRODUCTS', arr);
+                    let arr = Object.values(response.data);
+                    commit('SET_PRODUCTS', arr[arr.length-1]);
                 })
                 .catch( error => console.log(error));
     },
     sendProducts( {commit} ){
         axios.post('/products.json', this.getters.products)
-            .then( res => console.log("sendproducts: "+ res) )
+            .then( 
+                // res => console.log("sendproducts: "+ res) 
+            )
             .catch( error => console.log(error));
     }
 }
