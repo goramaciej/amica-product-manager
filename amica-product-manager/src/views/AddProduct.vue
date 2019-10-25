@@ -56,7 +56,6 @@ export default {
     },
     methods: {
         categorySelected(category, subcategory=0){
-            console.log("category selected: " + category +" : " + subcategory);
             this.productData.cat = category;
             this.productData.subcat = subcategory
         },

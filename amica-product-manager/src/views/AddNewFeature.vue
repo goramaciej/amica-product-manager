@@ -76,7 +76,7 @@ export default {
             const featureToSave = JSON.parse(JSON.stringify(this.feature));
             this.$store.dispatch('addFeature', featureToSave);
             //this.$store.dispatch('sendFeatures');
-            this.$router.push('/features_manager')
+            this.$router.push('/features-manager')
         },
         submitAndClear(){
             const featureToSave = JSON.parse(JSON.stringify(this.feature));
@@ -92,7 +92,7 @@ export default {
             this.feature.description = "";
         }
     }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -107,8 +107,8 @@ export default {
 
 #drop1 {
     margin-top: 2rem;
-    width: 105px;
-    height: 105px;
+    width: 102px;
+    height: 102px;
     @media screen and (min-width: $break-small) {
         margin-top: 0;
         margin-left: 2rem;

@@ -28,6 +28,9 @@ export default {
             this.$store.dispatch('sendFeatures');
         }
     },
+    mounted(){
+        console.log("Features Mounted");
+    }
 };
 </script>
 

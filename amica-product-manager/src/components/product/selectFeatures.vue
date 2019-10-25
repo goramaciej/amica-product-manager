@@ -15,8 +15,7 @@ export default {
     name: "selectFeatures",
     data() {
         return {
-            selectedIds: [],
-            
+            selectedIds: [],    
         };
     },
     computed: {
@@ -26,9 +25,9 @@ export default {
         }
     },
     watch: {
-        features(val){
+        /*features(val){
             console.log("features has changed");
-        }
+        }*/
     }
 };
 </script>

@@ -110,7 +110,7 @@ export default {
             this.tooltip.style.left = x + "px";
         }
     }
-};
+}
 </script>
 <style lang="scss" scoped>
 @import "../../scss/tooltip.scss";
