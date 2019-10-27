@@ -1,11 +1,14 @@
 <template>
     <header :class="{ 'header--hidden': !showNavbar }">
-        <img src="../images/amica-logo.png" alt="logo-amica" />
+        <div class="logo" @click="homepage">
+            <img src="../images/amica-logo.png" alt="logo-amica" />
+        </div>
+        
         <nav>
-            <router-link tag="li" :class="{'independent-link': productsInRouter}" to="/products">Produkty</router-link>
-            <router-link tag="li" to="/products/addproduct">Dodaj nowy produkt</router-link>
+            <router-link tag="li" :class="{'independent-link': productsInRouter}" :to="{ name: 'products', params: { category: 'wszystkie' }}">Produkty</router-link>
+            <router-link tag="li" :to="{ name: 'addproduct'}">Dodaj nowy produkt</router-link>
             <!-- <router-link tag="li" to="/categories_manager">Zarządzanie kategoriami</router-link> -->
-            <router-link tag="li" to="/features-manager" 
+            <router-link tag="li" :to="{ name: 'featuresManager'}" 
             :class="{'independent-link': featuresInRouter}">Zarządzanie funkcjami</router-link>
         </nav>
     </header>
@@ -38,8 +41,11 @@ export default {
             // Set the current scroll position as the last scroll position
             this.lastScrollPosition = currentScrollPosition;
         },
+        homepage(){
+            this.$router.push({ name:'home'});
+        },
         checkRouter(){
-            this.productsInRouter = this.$route.path.includes('products') && !this.$route.path.includes('addproduct');
+            this.productsInRouter = this.$route.path.includes('product') && !this.$route.path.includes('addproduct');
             this.featuresInRouter = this.$route.path.includes('features');
         }
 
@@ -73,6 +79,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+}
+.logo{
+    cursor: pointer;
 }
 header.header--hidden {
     box-shadow: none;

@@ -3,6 +3,7 @@
         <div class="filters">
             <div class="filters-element">
                 <i class="icofont-search-2"></i>
+                <h2> {{ $route.params.category }} </h2>
                 <h4>Wyświetl:</h4>
                 <select v-model="categoryName" @change="catSelected" class="form-control">
                     <option selected>Wszystkie</option>
@@ -17,7 +18,7 @@
         <div class="products">
             <product-item
                 v-for="(product, index) in products"
-                :key="'dupa' + index + keyNum"
+                :key="'key' + index + keyNum"
                 :product="product"
                 :classBig="itemsBig"
                 :index="index"
@@ -26,8 +27,6 @@
                 @registerItem="registerItem"
             ></product-item>
         </div>
-
-        <!-- <router-view></router-view> -->
     </div>
 </template>
 
@@ -43,7 +42,9 @@ export default {
             showArr: [],
             categoryName: "Wszystkie",
             selectedCategory: 0,
-            keyNum: 0
+            keyNum: 0,
+
+            selector: null
         };
     },
     components: {
@@ -94,20 +95,69 @@ export default {
             this.showArr = [];
         },
         catSelected(ev) {
+            switch(ev.target.value){
+                case 'Wszystkie':
+                    this.$router.push({name: 'products', params: {category:'wszystkie'}});
+                    break;
+                case 'Lodówki':
+                    this.$router.push({name: 'products', params: {category:'lodowki'}});
+                    break;
+                case 'Kuchnie wolnostojące':
+                    this.$router.push({name: 'products', params: {category:'kuchnie'}});
+                    break;
+                case 'Piekarniki':
+                    this.$router.push({name: 'products', params: {category:'piekarniki'}});
+                    break;
+                case 'Zmywarki':
+                    this.$router.push({name: 'products', params: {category:'zmywarki'}});
+                    break;
+                case 'Odkurzacze':
+                    this.$router.push({name: 'products', params: {category:'odkurzacze'}});
+                    break;
+            }
+        },
+        changeCategory(){
             this.keyNum++;
             this.registeredItems = [];
-            if (ev.target.value == "Wszystkie") {
-                this.selectedCategory = 0;
-            } else {
-                this.selectedCategory = this.categories.find(
-                    el => el.name == ev.target.value
-                ).id;
+            switch (this.$route.params.category){
+                case 'wszystkie':
+                    this.selectedCategory = 0;
+                    this.categoryName = "Wszystkie";
+                    break;
+                case 'lodowki':
+                    this.selectedCategory = 1;
+                    this.categoryName = "Lodówki";
+                    break;
+                case 'kuchnie':
+                    this.selectedCategory = 2;
+                    this.categoryName = "Kuchnie wolnostojące";
+                    break;
+                case 'piekarniki':
+                    this.selectedCategory = 3;
+                    this.categoryName = "Piekarniki";
+                    break;
+                case 'zmywarki':
+                    this.selectedCategory = 4;
+                    this.categoryName = "Zmywarki";
+                    break;
+                case 'odkurzacze':
+                    this.selectedCategory = 5;
+                    this.categoryName = "Odkurzacze";
+                    break;
+                default :
+                    this.$router.push({name: 'products', params: {category:'wszystkie'}});
             }
         }
     },
-    mounted() {
-        this.productsToShow = this.products;
-    }
+    watch: { 
+        '$route.params.category': {
+            handler: function(category) {
+                this.changeCategory();
+            },
+            deep: true,
+            immediate: true
+        }
+    },
 };
 </script>
 

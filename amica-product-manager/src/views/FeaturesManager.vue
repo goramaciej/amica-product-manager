@@ -1,8 +1,11 @@
 <template>
     <div class="featuresManager">
-        <router-link tag="li" to="/features-manager/add-new-feature" class="amica-button">Dodaj nową funkcję</router-link>
+        <div class="buttons">
+            <router-link tag="div" :to="{name: 'addNewFeature'}" class="amica-button">Dodaj nową funkcję</router-link>
         <div class="amica-button" @click="saveOnServer">Zapisz wszystkie funkcje</div>
+        </div>
         <div class="features-overview">
+            
             <feature-component v-for="(item, index) in features" :key="index" :feature="item"/>
         </div>
     </div>
@@ -28,9 +31,6 @@ export default {
             this.$store.dispatch('sendFeatures');
         }
     },
-    mounted(){
-        console.log("Features Mounted");
-    }
 };
 </script>
 
@@ -40,7 +40,7 @@ export default {
         display:flex;
         flex-wrap: wrap;
         justify-content:center;
-        margin: 20px 0 30px 20px;
-        // align-items: flex-start;
+        align-items: flex-start;
+        margin: 40px 0 30px 20px;
     }
 </style>

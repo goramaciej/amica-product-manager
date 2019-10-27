@@ -4,6 +4,7 @@
         <img :src="feature.imageURL" class="img-responsive" alt />
         <h3>{{ feature.title }}</h3>
         <p>{{ feature.description }}</p>
+        <!-- <div class="mcover"></div> -->
     </div>
 </template>
 
@@ -22,6 +23,8 @@ export default {
     padding: 20px 15px 0 15px;
     margin: 0 0 20px 0;
     max-width: 360px;
+    //max-height: 500px;
+    //overflow: hidden;
     @media screen and (min-width: 320px) {
         flex: 1 0 320px;
     }
@@ -42,7 +45,17 @@ export default {
     &:hover .feature-icon{
         transform: scale(1.1);
     }
+
+    .mcover{
+        width: 100%;
+        border: 1px solid red;
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+        height: 80px;
+        position: absolute;
+        bottom: 0px;
+    }
 }
+
 
 img {
     vertical-align: middle;
@@ -71,8 +84,5 @@ h3 {
 .row-centered {
     text-align: center;
 }
-// .row {
-//     //margin-left: -10px;
-//     //margin-right: -10px;
-// }
+
 </style>

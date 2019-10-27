@@ -50,8 +50,7 @@ export default {
             this.isVisible = true;
         },
         productSelected(){
-            //router.push({ name: 'Product', params: { id: this.product.product_id } });
-            this.$router.push('products/product/'+this.product.product_id);
+            this.$router.push({ name: 'product', params: { id: this.product.product_id }})
         }
     },
     mounted() {

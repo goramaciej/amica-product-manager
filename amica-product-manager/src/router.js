@@ -19,29 +19,30 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: {
-                name: 'Products'
-            }
+            name: 'home',
+            redirect: '/products/wszystkie'
+            
         },
         {
-            path: '/products',
-            name: 'Products',
+            path: '/products/:category',
+            name: 'products',
             component: Products,
-        },
-        {
-            path: '/products/product',
-            name: 'Product',
-            component: Product,
-            children: [
+            /*children: [
                 {
                     path: ':id',
-                    name: 'Product',
-                    component: Product
+                    name: 'productsIn',
+                    component: Products
                 }
-            ]
+            ]*/
         },
         {
-            path: '/products/addproduct',
+            path: '/product/:id',
+            name: 'product',
+            component: Product
+            
+        },
+        {
+            path: '/addproduct',
             name: 'addproduct',
             component: AddProduct,
         },
