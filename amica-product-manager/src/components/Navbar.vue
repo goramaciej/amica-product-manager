@@ -4,7 +4,7 @@
             <img src="../images/amica-logo.png" alt="logo-amica" />
         </div>
         
-        <nav class="desktop-menu">
+        <nav>
             <router-link tag="li" :class="{'independent-link': productsInRouter}" :to="{ name: 'products', params: { category: 'wszystkie' }}">Produkty</router-link>
             <router-link tag="li" :to="{ name: 'addproduct'}">Dodaj nowy produkt</router-link>
             <!-- <router-link tag="li" to="/categories_manager">Zarządzanie kategoriami</router-link> -->
@@ -73,25 +73,19 @@ header {
     background: $amicared;
     position: fixed;
     box-shadow: 0 2px 15px rgba(71, 120, 120, 0.5);
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     transition: 0.4s all ease-out;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
 .logo{
     cursor: pointer;
 }
-.desktop-menu{
-    display: none;
-    @media screen and (min-width: $break-small-menu) {
-        display: block;
-    }
-}
 header.header--hidden {
     box-shadow: none;
-    transform: translateY(-100%);
+    transform: translate3d(0, -100%, 0);
 }
 nav {
     color: white;
@@ -103,7 +97,7 @@ nav {
         margin: 15px;
         font-family: "Lato";
         text-transform: uppercase;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 700;
 
         &:after {
