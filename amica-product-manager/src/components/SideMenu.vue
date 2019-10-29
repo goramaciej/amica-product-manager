@@ -113,8 +113,8 @@ nav {
     position: fixed;
     width: 50px;
     height: 40px;
-    right: 15px;
-    top: 11px;
+    right: 20px;
+    top: 10px;
     cursor: pointer;
     z-index: 1500;
     background-color: $amicared;

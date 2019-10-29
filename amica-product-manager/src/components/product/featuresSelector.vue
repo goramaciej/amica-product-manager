@@ -142,7 +142,6 @@ export default {
     align-content: flex-start;
     align-items: flex-start;
     flex-flow: row wrap;
-    padding: 10px;
 }
 .list-group-item,
 .feature-item {

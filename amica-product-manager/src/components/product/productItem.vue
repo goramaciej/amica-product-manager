@@ -89,7 +89,7 @@ export default {
     max-width: 250px;
     position: relative;
     overflow: hidden;
-    margin: 12px;
+    margin: 10px;
     // width: 100px;
     // height: 100px;
     cursor: pointer;

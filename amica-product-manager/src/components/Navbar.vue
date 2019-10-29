@@ -82,9 +82,11 @@ header {
 }
 .logo{
     cursor: pointer;
+    margin-left: 7px;
 }
 .desktop-menu{
     display: none;
+    margin-right: 20px;
     @media screen and (min-width: $break-small-menu) {
         display: block;
     }
@@ -100,8 +102,7 @@ nav {
         position: relative;
         cursor: pointer;
         list-style-type: none;
-        margin: 15px;
-        font-family: "Lato";
+        margin-left: 15px;
         text-transform: uppercase;
         font-size: 14px;
         font-weight: 700;

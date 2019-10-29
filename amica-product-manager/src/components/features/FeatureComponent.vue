@@ -16,26 +16,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/shared.scss";
 .feature {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 20px 15px 0 15px;
-    margin: 0 0 20px 0;
+    //padding: 20px 15px 0 15px;
+    //margin: 0 0 20px 0;
     max-width: 360px;
     //max-height: 500px;
     //overflow: hidden;
-    @media screen and (min-width: 320px) {
-        flex: 1 0 320px;
-    }
     @media screen and (min-width: 600px) {
         flex-basis: 300px;
-        padding: 40px 40px 0 25px;
+        padding: 40px 30px 0 30px;
     }
     .feature-icon {
         position: absolute;
-        top: 0;
-        left: 0;
+        //top: 10px;
+        //left: 10px;
         z-index: 10;
         width: 25%;
         height: auto;
@@ -70,14 +68,7 @@ img {
     max-width: 100%;
     height: auto;
 }
-h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    line-height: 1.1;
-    text-align: center;
-}
+
 .feature p {
     text-align: justify;
 }

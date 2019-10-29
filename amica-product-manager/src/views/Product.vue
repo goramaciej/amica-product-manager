@@ -66,6 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/variables.scss";
+@import "../scss/shared.scss";
 .product {
     max-width: 1200px;
     margin: 0 20px;
@@ -87,21 +88,12 @@ export default {
     .info {
         // background-color: yellow;
         grid-area: info;
-        padding-right: 20px;
+        background-color: $amicared;
     }
     .features {
         
         height: 100px;
         grid-area: features;
-    }
-    h3 {
-
-        font-weight: 700;
-        font-size: 18px;
-        margin-top: 10px;
-    }
-    h4{
-
     }
 
     @media screen and (min-width: 740px) {

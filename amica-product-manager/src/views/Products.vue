@@ -243,11 +243,11 @@ $filtersWidth: 250px;
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 80px 1fr;
+    grid-template-rows: 90px 1fr;
 
     .filters-wrapper {
         position: relative;
-        top: -80px;
+        top: -60px;
         background-color: $amicared;
         height: 150px;
         .filters{
@@ -293,8 +293,8 @@ $filtersWidth: 250px;
 }
 
 .products {
-    padding-top: 10px;
     width: 100%;
+    padding: 10px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
@@ -303,23 +303,29 @@ select option:hover {
     //box-shadow: 0 0 10px 100px #1882A8 inset;
     font-size: 25px;
 }
-
-.searchResult {
-    width: 300px;
-    display: block;
-    height: 45px;
-    padding: 6px 12px;
-    font-size: 12px;
-    color: #555;
-    background-color: #fff;
-    border: 1px solid #555;
-    border-radius: 4px;
-    cursor: pointer;
-    &:hover{
-        color: white;
-        background: $amicared;
-    }
+.searchResults{
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    .searchResult {
+        white-space: nowrap;
+        max-width: 90vw;
+        text-overflow: ellipsis;
+        padding: 6px 12px;
+        font-size: 12px;
+        color: #555;
+        background-color: #fff;
+        border: 1px solid #555;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover{
+            color: white;
+            background: $amicared;
+        }
 }
+    
+}
+
 .form-group{
     position:relative;
 }
