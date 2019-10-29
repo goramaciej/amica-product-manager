@@ -51,11 +51,11 @@ export default {
             }
         },
         featuresData() {
-            let newArr = [];
+            let featuresArray = [];
             if (this.productData) {
-                newArr = this.productData.features;
+                featuresArray = this.productData.features;
             }
-            return newArr;
+            return featuresArray;
         },
         getImages() {
             return this.productData ? this.productData.images : [];

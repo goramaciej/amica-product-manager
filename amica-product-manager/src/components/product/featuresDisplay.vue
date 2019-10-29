@@ -24,20 +24,27 @@
 import featureComponent from "../features/FeatureComponent.vue";
 export default {
     name: "featuresDisplay",
-    props: ["features"],
+    props: {
+        features: Array,
+        showAllFeatures: Boolean
+    },
     components: {
         featureComponent
     },
     computed: {
         fetchedFeatures() {
-            let newArr = [];
-            if (this.features) {
-                //var result = arr.map(person => ({ value: person.id, text: person.name }));
-                newArr = this.$store.getters.features.filter(el =>
-                    this.features.includes(el.id)
-                );
+            let featuresData = [];
+            if (this.showAllFeatures) {
+                featuresData = this.$store.getters.features;
+            } else {
+                if (this.features) {
+                    //var result = arr.map(person => ({ value: person.id, text: person.name }));
+                    featuresData = this.$store.getters.features.filter(el =>
+                        this.features.includes(el.id)
+                    );
+                }
             }
-            return newArr;
+            return featuresData;
         }
     }
 };

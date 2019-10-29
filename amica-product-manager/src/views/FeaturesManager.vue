@@ -4,27 +4,24 @@
             <router-link tag="div" :to="{name: 'addNewFeature'}" class="amica-button">Dodaj nową funkcję</router-link>
         <div class="amica-button" @click="saveOnServer">Zapisz wszystkie funkcje</div>
         </div>
-        <div class="features-overview">
-            
-            <feature-component v-for="(item, index) in features" :key="index" :feature="item"/>
-        </div>
+
+        <features-display class="inner-features" :features="[]" :show-all-features="true">
+
+        </features-display>
     </div>
 </template>
 
 <script>
-import featureComponent from "../components/features/FeatureComponent.vue";
+//import featureComponent from "../components/features/FeatureComponent.vue";
+import FeaturesDisplay from "../components/product/featuresDisplay.vue";
 export default {
     name: "featuresManager",
     data() {
         return {};
     },
-    computed: {
-        features() {
-            return this.$store.getters.features;
-        }
-    },
     components: {
-        featureComponent
+        //featureComponent
+        FeaturesDisplay //remember - set show-all-features on this component to true to get data from axios
     },
     methods: {
         saveOnServer(){
@@ -34,13 +31,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
-    .features-overview{
-        // background-color: pink;
-        display:flex;
-        flex-wrap: wrap;
-        justify-content:center;
-        align-items: flex-start;
-        //margin: 40px 0 30px 20px;
+<style lang="scss" scoped>
+@import "../scss/variables.scss";
+    .inner-features{
+        padding: $bm 0 0 $bm;
     }
 </style>
