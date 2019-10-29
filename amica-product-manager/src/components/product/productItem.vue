@@ -1,11 +1,10 @@
 <template>
     <div
         class="product-item"
-        :class="{ 'product-item-big': classBig, 'is-visible': isVisible}"
+        :class="{'is-visible': isVisible}"
         v-observe-visibility="{
             callback: visibilityChanged,
             throttle: 0,
-            //once: true,
         }"
         @click="productSelected"
     >
@@ -30,7 +29,6 @@ export default {
     },
     props: {
         product: Object,
-        classBig: Boolean,
         index: Number
     },
     components: {
@@ -80,17 +78,20 @@ export default {
     h4 {
         font-size: 13px;
         font-weight: 700;
-        white-space: nowrap;
+        //white-space: nowrap;
         text-align: right;
         margin: 6px 0;
     }
 }
 .product-item {
+    flex: 1 1 160px;
+    max-height: 250px;
+    max-width: 250px;
     position: relative;
     overflow: hidden;
     margin: 12px;
-    width: 100px;
-    height: 100px;
+    // width: 100px;
+    // height: 100px;
     cursor: pointer;
     border: 1px solid #b9b9b9;
     opacity: 0;
@@ -99,11 +100,6 @@ export default {
     &.is-visible {
         opacity: 1;
         transform: translateX(0);
-    }
-
-    &.product-item-big {
-        width: 200px;
-        height: 200px;
     }
 
     img {
