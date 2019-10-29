@@ -16,7 +16,7 @@
 
 <script>
 import Gallery from "../components/product/gallery.vue";
-import FeaturesDisplay from "../components/product/featuresDisplay"
+import FeaturesDisplay from "../components/product/featuresDisplay.vue";
 export default {
     name: "Product",
     data() {
@@ -33,24 +33,27 @@ export default {
             ).find(el => el.product_id == this.$route.params.id);
             return pr;
         },
-        productName(){
-            if (this.productData){
+        productName() {
+            if (this.productData) {
                 return this.productData.productName;
-            }else{
+            } else {
                 return "";
             }
         },
-        productDescription(){
-            if (this.productData){
-                return this.productData.description.replace(this.productName, '');
-            }else{
+        productDescription() {
+            if (this.productData) {
+                return this.productData.description.replace(
+                    this.productName,
+                    ""
+                );
+            } else {
                 return "";
-            }            
+            }
         },
-        featuresData(){
+        featuresData() {
             let newArr = [];
-            if (this.productData){
-                newArr = this.productData.features
+            if (this.productData) {
+                newArr = this.productData.features;
             }
             return newArr;
         },
@@ -58,9 +61,7 @@ export default {
             return this.productData ? this.productData.images : [];
         }
     },
-    methods: {
-        
-    }
+    methods: {}
 };
 </script>
 
@@ -68,19 +69,18 @@ export default {
 @import "../scss/variables.scss";
 @import "../scss/shared.scss";
 .product {
-    max-width: 1200px;
-    margin: 0 20px;
+    margin: -$bm auto 0;
+    max-width: $break-xlarge;
+    padding-top: $bm;
     display: grid;
     grid-template-columns: 1fr;
-    //grid-template-columns: 1fr 200px;
-    //grid-auto-rows: minmax(30px, auto);
-    //grid-template-rows: 300px 400px 1fr;
     grid-template-areas:
         "gallery"
         "info"
         "features";
 
     .gallery {
+        margin-top: $bm;
         width: 100%;
         overflow: hidden;
         grid-area: gallery;
@@ -89,25 +89,56 @@ export default {
         // background-color: yellow;
         grid-area: info;
         background-color: $amicared;
+        color: white;
+        text-align: left;
+        margin: $bm 0;
+        padding: 0 $bm;
+        h3,
+        h4 {
+            text-align: left;
+            font-size: 18px;
+        }
     }
     .features {
-        
-        height: 100px;
         grid-area: features;
+        padding: 0 0 0 $bm;
     }
 
-    @media screen and (min-width: 740px) {
-        grid-template-columns: 1fr 300px;
+    @media screen and (min-width: $break-small-menu) {
+        grid-template-columns: 600px 1fr;
         grid-auto-rows: minmax(30px, auto);
         grid-template-areas:
             "gallery info"
             "features features";
-        h3 {
-            font-size: 2vw;
-            text-align: right;
+
+        .info {
+            grid-area: info;
+            margin: 0;
+            padding: $bm;
+            h3 {
+                font-size: 2.5vw;
+                text-align: right;
+            }
+            h4 {
+                font-size: 1.6vw;
+                text-align: right;
+            }
         }
-        h4{
-            text-align: right;
+        .features{
+            padding: $bm 0 0 $bm;
+        }
+    }
+    @media screen and (min-width: $break-xlarge) {
+        .info {
+            margin-right: $bm;
+            h3 {
+                font-size: 30px;
+                text-align: right;
+            }
+            h4 {
+                font-size: 22px;
+                text-align: right;
+            }
         }
     }
 }

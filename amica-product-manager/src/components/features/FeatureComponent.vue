@@ -17,32 +17,31 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../scss/shared.scss";
+@import "../../scss/variables.scss";
 .feature {
     position: relative;
     display: flex;
     flex-direction: column;
-    //padding: 20px 15px 0 15px;
-    //margin: 0 0 20px 0;
     max-width: 360px;
+    padding: $bm;
     //max-height: 500px;
     //overflow: hidden;
-    @media screen and (min-width: 600px) {
-        flex-basis: 300px;
-        padding: 40px 30px 0 30px;
-    }
+    // @media screen and (min-width: 600px) {
+    //     flex-basis: 300px;
+    //     padding: 40px 30px 0 30px;
+    // }
     .feature-icon {
         position: absolute;
-        //top: 10px;
-        //left: 10px;
-        z-index: 10;
+        top: 0px;
+        left: 0px;
         width: 25%;
-        height: auto;
-        transform: scale(0.9);
+        z-index: 10;
         transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.92, 1.3);
     }
     &:hover .feature-icon{
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
+   
 
     .mcover{
         width: 100%;
@@ -52,8 +51,22 @@ export default {
         position: absolute;
         bottom: 0px;
     }
+    p{
+        font-size: 15px;
+        text-align: justify;
+        line-height: 1.4;
+    }
 }
+// .feature:empty {
+//   height: 0;
+//   border: none;
+// }
 
+// *,
+// :before,
+// :after {
+//   box-sizing: border-box;
+// }
 
 img {
     vertical-align: middle;
@@ -63,7 +76,7 @@ img {
     height: auto;
 }
 .img-responsive {
-    margin: 0 auto;
+    //margin: 0 auto;
     display: block;
     max-width: 100%;
     height: auto;

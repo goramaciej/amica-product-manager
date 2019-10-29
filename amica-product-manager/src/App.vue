@@ -120,4 +120,10 @@ input[type]:focus,
     opacity: 0;
     transform: translateY(30px);
 }
+
+*,
+:before,
+:after {
+  box-sizing: border-box;
+}
 </style>

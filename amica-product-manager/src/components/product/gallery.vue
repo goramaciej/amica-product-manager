@@ -2,7 +2,7 @@
     <div>
         <div class="cont">
             <div class="thumbs">
-            <div class="thumb" v-for="(image, index) in images" :key="index" @click="thumbClicked(index)">
+            <div class="thumb" :class="{active: canShowActive(index)}" v-for="(image, index) in images" :key="index" @click="thumbClicked(index)">
                 <img class="res-image" :src="image" alt="product-image" />
             </div>
         </div>
@@ -38,20 +38,26 @@ export default {
     },
     methods: {
         thumbClicked(index){
+            if (index != this.currentImageNum)
             this.clicks++;
             this.currentImageNum = index;
         },
+        canShowActive(index){
+            return index === this.currentImageNum;
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/variables.scss";
     .cont{
         display: flex;
         width: 100%;
     }
     .thumbs{
-        flex: 0 0 100px;
+        margin: 0 $bm;
+        flex: 0 0 70px;
     }
     .thumb{
         margin: 0 auto 15px;
@@ -66,8 +72,9 @@ export default {
         }
     }
     .image {
-        flex: 1 1 100px;
-        max-height: 350px;
+        flex: 1 1 200px;
+        max-height: 340px;
+        margin-right: $bm;
     }
     .res-image{
         object-fit: contain;
