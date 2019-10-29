@@ -8,7 +8,7 @@
             <h3>{{ productName }}</h3>
         </div>
         <features-display class="features" :features="featuresData">
-            <button @click="clicked">show</button>
+            <!-- <button>show</button> -->
         </features-display>
         <!-- This is product: {{ $route.params.id }} -->
     </div>
@@ -59,9 +59,7 @@ export default {
         }
     },
     methods: {
-        clicked() {
-            console.dir(this.productData);
-        }
+        
     }
 };
 </script>
