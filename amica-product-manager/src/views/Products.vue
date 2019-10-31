@@ -221,7 +221,7 @@ export default {
             this.$refs.searchInput.value = "";
         },
         openSearchResult(item){
-            this.$router.push({ name: 'product', params: { id: item.product.product_id }})
+            this.$router.push({ name: 'product', params: { id: item.item.product_id }})
         }
         
     },
@@ -319,7 +319,7 @@ select option:hover {
         padding: 6px 12px;
         font-size: 12px;
         color: #555;
-        background-color: rgba(255, 255, 255, 0.85);
+        background-color: rgba(255, 255, 255, 0.9);
         border-bottom: 1px solid #555;
         cursor: pointer;
         &:hover{
