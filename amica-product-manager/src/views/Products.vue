@@ -13,7 +13,7 @@
                 <div class="filter-search filter">
                     <h4>Wyszukaj:</h4>
 
-                    <div class="form-group" @mouseleave="searchMouseLeave">
+                    <div class="form-group">
                         <input
                             type="text"
                             id="searchInput"
@@ -25,15 +25,17 @@
                         />
                         <i class="icofont-close-circled icon" v-if="clearSearchButton" @click="clearSearch"></i>
                         <div class="searchResults" >
-                            <div class="searchResult" v-for="(item, index) in searchArr" :key="index" @click="openSearchResult(item)">{{ item.product.description }}</div>
+                            <div v-if="searchItemWarning.length > 0" class="searchResult disabled"> {{ searchItemWarning }}</div>
+                            <div class="searchResult" v-for="(item, index) in searchArr" :key="index" @click="openSearchResult(item)">{{ item.description }}</div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="search">DDD</div> -->
         <div class="products">
-            <h4 v-if="prods">Brak produktów do wyświetlenia</h4>
+            <loader v-if="!allProducts.length>0"/>
+            <h4 v-if="products.length==0 && allProducts.length>0">Brak produktów w tej kategorii</h4>
             <product-item
                 v-for="(product, index) in products"
                 :key="'key' + index + keyNum"
@@ -49,6 +51,7 @@
 
 <script>
 import productItem from "../components/product/productItem.vue";
+import loader from "../components/Loader.vue";
 export default {
     name: "Products",
     data() {
@@ -63,22 +66,26 @@ export default {
 
             searchText: "Wyszukaj",
             searchArr: [],
-            clearSearchButton: false
+            clearSearchButton: false,
+            searchItemWarning: ''
         };
     },
     components: {
-        productItem
+        productItem,
+        loader
     },
     computed: {
-        products: {
-            get: function() {
-                let getProducts = JSON.parse(
+        allProducts() {
+            return JSON.parse(
                     JSON.stringify(this.$store.getters.products)
                 );
+        },
+        products: {
+            get: function() {
                 if (this.selectedCategory == 0) {
-                    return getProducts;
+                    return this.allProducts;
                 } else {
-                    return getProducts.filter(el => {
+                    return this.allProducts.filter(el => {
                         return el.cat == this.selectedCategory;
                     });
                 }
@@ -90,16 +97,6 @@ export default {
             );
             return cats;
         },
-        prods(){
-            return this.products.length < 1;
-        },
-        searchValueLength(){
-            if (this.$refs.searchInput){
-                return this.$refs.searchInput.value.length > 0;
-            }else{
-                return false;
-            }
-        }
     },
     methods: {
         registerItem(item) {
@@ -121,7 +118,7 @@ export default {
             }
             this.showArr = [];
         },
-        catSelected(ev) {
+        catSelected(ev) {            
             switch (ev.target.value) {
                 case "Wszystkie":
                     this.$router.push({
@@ -198,27 +195,32 @@ export default {
         },
 
         searchTextChanged(ev){
-            if (ev.target.value.length > 2){
-                this.searchArr = this.registeredItems.filter( item => {
-                    return item.product.description.toLowerCase().includes(ev.target.value.toLowerCase());
+            let tex = ev.target.value;
+            if (tex.length > 2){
+                this.searchArr = this.allProducts.filter( item => {
+                    return (item.description.toLowerCase().includes(tex.toLowerCase()));
                 });
+                if (this.searchArr.length < 1){
+                    this.searchItemWarning = "Brak produktów z frazą: "+tex;
+                }else{
+                    this.searchItemWarning = "";
+                }
+            }else if (tex.length > 0){
+                this.searchArr = [];
+                this.searchItemWarning = "min. 2 znaki";
             }else{
                 this.searchArr = [];
+                this.searchItemWarning = "";
             }
-
-            this.clearSearchButton = ev.target.value.length > 0;
-            
+            this.clearSearchButton = tex.length > 0;            
         },
         clearSearch(){
             this.searchArr = [];
+            this.searchItemWarning = "";
             this.clearSearchButton = false;
             this.$refs.searchInput.value = "";
         },
-        searchMouseLeave(){
-            //console.log("searchMouseLeave");
-        },
         openSearchResult(item){
-            //console.log(item.product.product_id);
             this.$router.push({ name: 'product', params: { id: item.product.product_id }})
         }
         
@@ -257,7 +259,7 @@ $filtersWidth: 250px;
             width: 100%;            
             display: flex;
             flex-flow: row-reverse nowrap;
-            padding: 65px 20px 10px 20px;
+            padding: 65px $bm 10px $bm;
             text-align: left;
             color: white;
             top: 0;
@@ -265,7 +267,7 @@ $filtersWidth: 250px;
                 width: 100%;
             }
             .filter-search{
-                padding-right: 20px;
+                padding-right: $bm;
             }
         }
     }
@@ -278,9 +280,7 @@ $filtersWidth: 250px;
             .filters {
                 width: $filtersWidth;
                 flex-flow: column nowrap;
-                .filter {
-                    
-                }
+                padding: 80px $bm 10px $bm;
                 .filter-search{
                     padding-right: 0;
                 }
@@ -307,20 +307,27 @@ select option:hover {
     position: absolute;
     display: flex;
     flex-flow: column nowrap;
+    overflow-y: auto; 
+    max-height: calc(100vh - 240px);
     .searchResult {
         white-space: nowrap;
         max-width: 90vw;
+        min-height: 30px;
         text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
         padding: 6px 12px;
         font-size: 12px;
         color: #555;
-        background-color: #fff;
-        border: 1px solid #555;
-        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px solid #555;
         cursor: pointer;
         &:hover{
             color: white;
             background: $amicared;
+        }
+        &.disabled{
+            pointer-events: none;
         }
 }
     

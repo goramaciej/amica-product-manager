@@ -1,21 +1,22 @@
 <template>
-    <div class="features-manager" id="features-manager-container" @mousemove="mouseContainerMoving">
-        <div class="c-tooltip" id="features-tooltip">Blokada rodzicielska</div>
+    <div class="features-manager" id="features-manager-container" >
+        <div class="amica-tooltip" id="features-tooltip">Blokada rodzicielska</div>
         <div class="col" id="containerLeft">
             <draggable class="list-group dashed-background" group="features"
-            :list="itemsFromStore">
+            :list="itemsFromStore" @start="startDrag" @end="endDrag">
                 <div
                     class="feature-item"
                     v-for="(element, index) in itemsFromStore"
                     :key="index"
                     :data-tooltip="element.title"
                     data-tooltiplocation="left"
+
                     @mouseover="mouseEnter"
+                    @mouseenter="mouseEnter"
                     @mouseleave="mouseLeave"
                     @mousemove="mouseMoving"
-                    @mousedown="mouseLeave"
-                    @dragstart="startDrag"                    
-                    @dragend="endDrag"
+
+                    :class="{dragge: meDragging}"
                 >
                     <img :src="element.iconURL" />
                 </div>
@@ -24,19 +25,19 @@
 
         <div class="col" id="containerRight">
             <draggable class="list-group dashed-background" group="features" 
-            :list="selectedItems" @change="featuresListChanged">
+            :list="selectedItems" @change="featuresListChanged" @start="startDrag"
+            @end="endDrag">
                 <div
                     class="feature-item"
                     v-for="(element, index) in selectedItems"
                     :key="element.name"
-                    @mouseover="mouseEnter"
-                    @mouseleave="mouseLeave"
-                    @mousemove="mouseMoving"
-                    @mousedown="mouseLeave"
-                    @dragstart="startDrag"
-                    @dragend="endDrag"
                     :data-tooltip="element.title"
                     data-tooltiplocation="right"
+                    
+                    @mouseover="mouseEnter"
+                    @mouseenter="mouseEnter"
+                    @mouseleave="mouseLeave"
+                    @mousemove="mouseMoving"        
                 >
                     <img :src="element.iconURL" />
                 </div>
@@ -61,6 +62,8 @@ export default {
             container: null,
             dragging: false,
             movedAfterDrag: true,
+
+            meDragging: false
         };
     },
     computed: {
@@ -80,12 +83,9 @@ export default {
             let featuresArr = this.selectedItems.map(({ id }) => id)
             this.$emit('featuresChange', featuresArr);
         },
-        mouseContainerMoving(ev) {
-            if (!this.movedAfterDrag) this.movedAfterDrag = true;
-        },
         mouseEnter(ev) {
             this.tooltip.textContent = ev.target.dataset.tooltip;
-            if ((!this.dragging) && (this.movedAfterDrag)) {
+            if (!this.dragging){
                 this.tooltip.classList.add("mactive");
             }
         },
@@ -94,19 +94,19 @@ export default {
         },
         startDrag(ev) {
             this.dragging = true;
+            this.tooltip.style.top = "-2000px";
         },
         endDrag(ev) {
+            console.log('stopDragging');
             this.dragging = false;
-            this.movedAfterDrag = false;
         },
         mouseMoving(ev) {
             let y = ev.pageY ;
-            this.tooltip.style.top = y + "px";
-
             let x = ev.pageX + 10;
             if (ev.target.dataset.tooltiplocation=='right'){
                 x = ev.pageX - 200;
             }
+            this.tooltip.style.top = y + "px";
             this.tooltip.style.left = x + "px";
         }
     }
@@ -115,6 +115,9 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/tooltip.scss";
 @import "../../scss/variables.scss";
+.dragge{
+    border: 3px solid green;
+}
 
 .features-manager {
     display: flex;

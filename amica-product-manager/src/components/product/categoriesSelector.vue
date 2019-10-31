@@ -44,7 +44,7 @@ export default {
         
         setSubcategories(subcatsArray){
             this.$refs.subcategorySelector.selectedIndex = 0;
-            if (subcatsArray.length > 0){
+            if (subcatsArray && subcatsArray.length > 0){
                 this.subCategories = subcatsArray;
                 this.subcategoryDisabled = false;
                 this.subcategoriesDisabledText = "Wybierz podkategorię produktu";

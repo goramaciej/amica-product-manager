@@ -1,6 +1,8 @@
 <template>
     <div class="amicaform">
         <h4>Dodaj nową funkcję:</h4>
+        <p class="validateText" 
+            v-if="showValidation && feature.title.length < 2">Wprowadź nazwę funkcji (min. 2 znaki)</p>
         <div class="form-group">
             <input
                 type="text"
@@ -10,6 +12,8 @@
                 v-model="feature.title"
             />
         </div>
+        <p class="validateText" 
+            v-if="showValidation && feature.description.length<1">Wprowadź opis funkcji</p>
         <div class="form-group">
             <textarea
                 cols="40"
@@ -22,6 +26,8 @@
             ></textarea>
         </div>
         <h5>Przeciągnij z innego okna zdjęcie obrazujące funkcję oraz jej ikonę:</h5>
+        <p class="validateText" 
+            v-if="showValidation && (feature.iconURL.length==0 || feature.imageURL.length==0)">Funkcja musi posiadać ikonę i zdjęcie</p>
         <div class="imagePlaceholders">            
             <div id="drop2" class="drop dashed-background" @dragover.prevent @drop="imageDrop">
                 <img class="product-image" :src="feature.imageURL" />
@@ -53,7 +59,8 @@ export default {
                 imageURL: "",
                 title: "",
                 description: ""
-            }
+            },
+            showValidation: false,
         };
     },
     methods: {
@@ -73,16 +80,18 @@ export default {
         },
         
         submitFeature(){
-            const featureToSave = JSON.parse(JSON.stringify(this.feature));
-            this.$store.dispatch('addFeature', featureToSave);
-            //this.$store.dispatch('sendFeatures');
-            this.$router.push('/features-manager')
+            if (this.validation()){
+                const featureToSave = JSON.parse(JSON.stringify(this.feature));
+                this.$store.dispatch('addFeature', featureToSave);
+                this.$router.push('/features-manager')
+            }
         },
         submitAndClear(){
-            const featureToSave = JSON.parse(JSON.stringify(this.feature));
-            this.$store.dispatch('addFeature', featureToSave);
-            //this.$router.push('/features_manager');
-            this.clear();
+            if (this.validation()){
+                const featureToSave = JSON.parse(JSON.stringify(this.feature));
+                this.$store.dispatch('addFeature', featureToSave);
+                this.clear();
+            }
         },
         clear(){
             this.feature.id = Math.floor(Math.random() * 100000);
@@ -90,6 +99,16 @@ export default {
             this.feature.imageURL = "";
             this.feature.title = "";
             this.feature.description = "";
+            this.showValidation = false;
+        },
+        validation(){
+            if (this.feature.iconURL.length==0 || this.feature.imageURL.length==0 || this.feature.title.length<2 || this.feature.description.length < 1 ){
+                this.showValidation = true;
+                window.scrollTo(0, 0);
+                return false;
+            }else{
+                return true;
+            }
         }
     }
 }
@@ -97,6 +116,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/variables.scss";
+
+.validateText{
+    text-align: left;
+    color: red;
+    font-size: 13px;
+    font-weight: 700;
+    font-style: italic;
+}
 
 .imagePlaceholders{
     text-align: center;

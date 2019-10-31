@@ -5,23 +5,21 @@
         <div class="amica-button" @click="saveOnServer">Zapisz wszystkie funkcje</div>
         </div>
 
-        <features-display class="inner-features" :features="[]" :show-all-features="true">
+        <features-collection class="inner-features" :features="[]" :show-all-features="true">
 
-        </features-display>
+        </features-collection>
     </div>
 </template>
 
 <script>
-//import featureComponent from "../components/features/FeatureComponent.vue";
-import FeaturesDisplay from "../components/product/featuresDisplay.vue";
+import featuresCollection from "../components/features/featuresCollection.vue";
 export default {
     name: "featuresManager",
     data() {
         return {};
     },
     components: {
-        //featureComponent
-        FeaturesDisplay //remember - set show-all-features on this component to true to get data from axios
+        featuresCollection //remember - set show-all-features on this component to true to get data from axios
     },
     methods: {
         saveOnServer(){
@@ -33,7 +31,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/variables.scss";
+    .featuresManager{
+        padding-top: 10px;
+    }
     .inner-features{
-        padding: $bm 0 0 $bm;
+        overflow: hidden;
     }
 </style>

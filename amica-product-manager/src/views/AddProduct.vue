@@ -1,6 +1,8 @@
 <template>
     <div class="amicaform">
         <h4>Dodaj nowy produkt:</h4>
+        <p class="validateText" 
+            v-if="showValidation && productData.productName.length<3">Wprowadź nazwę produktu (min. 2 znaki)</p>
         <div class="form-group">
             <input
                 type="text"
@@ -11,6 +13,8 @@
             />
         </div>
         <h5>Wybierz kategorię i podkategorię produktu:</h5>
+        <p class="validateText" 
+            v-if="showValidation && productData.cat == 0">Proszę wybrać kategorię produktu</p>
         <select-category @change="categorySelected" :key="'a' + componentKey"/>
         <h5>Dodaj opis produktu:</h5>
         <div class="form-group">
@@ -25,8 +29,12 @@
             ></textarea>
         </div>
         <h5>Dodaj zdjęcia produktu przeciągając je z innego okna przeglądarki:</h5>
+        <p class="validateText" 
+            v-if="showValidation && productData.images.length<1">Produkt musi posiadać minimum 1 zdjęcie</p>
         <add-image @imageadded="addImage" :images="productData.images" :key="'b' + componentKey"/>
         <h5>Przeciągnij do prawej ramki funkcje produktu:</h5>
+        <p class="validateText" 
+            v-if="showValidation && productData.features.length<1">Produkt musi posiadać minimum 1 funkcję</p>
         <select-features @featuresChange="featuresChange" :key="'c' + componentKey"/>
         <div class="buttons">
             <div class="amica-button" @click="saveProduct">Zapisz</div>
@@ -46,6 +54,7 @@ export default {
                 
             },
             componentKey: 0,
+            showValidation: false
         };
     },
 
@@ -69,14 +78,6 @@ export default {
             return Math.floor(Math.random() * 100000);
         },
 
-        addProduct(){
-            this.$store.commit('ADD_PRODUCT', this.productData);
-        },
-        saveProduct(){
-            this.$store.commit('ADD_PRODUCT', this.productData);
-            this.$store.dispatch('sendProducts');
-            this.clear();
-        },
         clear(){
             this.initData();
             this.componentKey++;
@@ -100,7 +101,37 @@ export default {
                 color: "",
                 power: 0
             }
-        }
+        },
+        validate(){
+            if (this.productData.cat==0 || 
+                this.productData.productName.length < 2 || 
+                this.productData.images.length<1 ||
+                this.productData.features.length<1){
+                    this.showValidation = true;
+                    window.scrollTo(0, 0);
+                    return false;
+            }else{
+                this.showValidation = false;
+                return true;
+            }
+            // block scroll
+            //document.querySelector('body').style.overflow = 'hidden';
+           
+        },
+        addProduct(){
+            this.$store.commit('ADD_PRODUCT', this.productData);
+        },
+        saveProduct(){
+            if (this.validate()){
+                this.$store.commit('ADD_PRODUCT', this.productData);
+                this.$store.dispatch('sendProducts');
+                this.clear();
+            }
+        },
+        // removeValidation(){
+        //     //document.querySelector('body').style.overflow = 'auto';
+        //     this.showValidation = false;
+        // }
     },
     created(){
         this.initData ();
@@ -109,6 +140,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/variables.scss";
+
+.validateText{
+    text-align: left;
+    color: red;
+    font-size: 13px;
+    font-weight: 700;
+    font-style: italic;
+}
+
 .imagediv {
     display: inline-block;
     margin: 0 10px;
@@ -125,6 +166,6 @@ textarea {
 }
 .buttons{
     text-align: right;
-    margin: 20px 0;
+    margin: $bm 0;
 }
 </style>

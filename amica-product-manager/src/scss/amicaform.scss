@@ -7,13 +7,12 @@
 }
 
 .amicaform {
-    margin: 0 20px;
-    max-width: 800px;
-    @media screen and (min-width: $break-small) {
-        margin: 0 35px;
-    }
+    position: relative;
+    margin: $bm $bm;
+    padding-top: 7px;
+    max-width: $break-big;
     @media screen and (min-width: $break-big) {
-        margin: 0 auto;
+        margin: $bm auto;
     }
 
     h4, h5{

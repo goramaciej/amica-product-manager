@@ -5,7 +5,7 @@
 $tt-border-color: rgba(255, 255, 255, 0.9);
 $tt-background-color: #e31329;
 
-.c-tooltip{
+.amica-tooltip{
     padding: 10px 18px;
     min-width: 150px;
     max-width: 200px;
@@ -19,7 +19,7 @@ $tt-background-color: #e31329;
     position: absolute;
     left: 20px;
     top: 100px;
-    z-index: 9999;
+    z-index: 20;
     pointer-events: none;
     transform: scale(0) translateX(0);
     transition: transform 0.2s, width 1s ease-in-out;

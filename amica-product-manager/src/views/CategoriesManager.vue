@@ -1,6 +1,6 @@
 <template>
     <div class="features-manager" id="features-manager-container" @mousemove="mouseContainerMoving">
-        <div class="c-tooltip" id="features-tooltip">Blokada rodzicielska</div>
+        <div class="amica-tooltip" id="features-tooltip">Blokada rodzicielska</div>
         <div class="col" id="containerLeft">
             <draggable class="list-group" :list="features" group="people" @change="log" id="bcga">
                 <div

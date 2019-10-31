@@ -86,23 +86,18 @@ header {
 }
 .desktop-menu{
     display: none;
-    margin-right: 20px;
+    margin-right: $bm;
+    color: white;
     @media screen and (min-width: $break-small-menu) {
         display: block;
     }
-}
-header.header--hidden {
-    box-shadow: none;
-    transform: translateY(-100%);
-}
-nav {
-    color: white;
-    li {
+
+    li {        
         display: inline-block;
         position: relative;
         cursor: pointer;
         list-style-type: none;
-        margin-left: 15px;
+        margin-left: $bm;
         text-transform: uppercase;
         font-size: 14px;
         font-weight: 700;
@@ -124,5 +119,9 @@ nav {
             left: 0; 
         }
     }
+}
+header.header--hidden {
+    box-shadow: none;
+    transform: translateY(-100%);
 }
 </style>

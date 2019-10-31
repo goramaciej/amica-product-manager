@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="features-overview">
-            <feature-component
+            <loader v-if="fetchedFeatures.length<0"/>
+            <feature-item
                 class="flex-locator"
                 v-for="(item, index) in fetchedFeatures"
                 :key="index"
@@ -21,15 +22,15 @@
 </template>
 
 <script>
-import featureComponent from "../features/FeatureComponent.vue";
+import featureItem from "./featureItem.vue";
 export default {
-    name: "featuresDisplay",
+    name: "featuresCollection",
     props: {
         features: Array,
         showAllFeatures: Boolean
     },
     components: {
-        featureComponent
+        featureItem
     },
     computed: {
         fetchedFeatures() {
@@ -55,6 +56,9 @@ export default {
 .features-overview {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin: $bm;
+    margin-right: -10px;
 }
 .flex-locator {
     flex: 1 0 260px;

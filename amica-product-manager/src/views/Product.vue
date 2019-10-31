@@ -1,30 +1,30 @@
 <template>
     <div class="product">
         <div class="gallery">
-            <gallery :images="getImages" />
+            <product-gallery :images="getImages" />
         </div>
         <div class="info">
             <h4>{{ productDescription }}</h4>
             <h3>{{ productName }}</h3>
         </div>
-        <features-display class="features" :features="featuresData">
+        <features-collection class="features" :features="featuresData">
             <!-- <button>show</button> -->
-        </features-display>
+        </features-collection>
         <!-- This is product: {{ $route.params.id }} -->
     </div>
 </template>
 
 <script>
-import Gallery from "../components/product/gallery.vue";
-import FeaturesDisplay from "../components/product/featuresDisplay.vue";
+import productGallery from "../components/product/productGallery.vue";
+import featuresCollection from "../components/features/featuresCollection.vue";
 export default {
     name: "Product",
     data() {
         return {};
     },
     components: {
-        Gallery,
-        FeaturesDisplay
+        productGallery,
+        featuresCollection
     },
     computed: {
         productData() {
@@ -101,7 +101,7 @@ export default {
     }
     .features {
         grid-area: features;
-        padding: 0 0 0 $bm;
+        overflow: hidden;
     }
 
     @media screen and (min-width: $break-small-menu) {
@@ -125,7 +125,7 @@ export default {
             }
         }
         .features{
-            padding: $bm 0 0 $bm;
+            padding-top: $bm;
         }
     }
     @media screen and (min-width: $break-xlarge) {

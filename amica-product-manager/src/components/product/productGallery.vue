@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    name: "gallery",
+    name: "productGallery",
     data() {
         return {
             currentImageNum: 0,

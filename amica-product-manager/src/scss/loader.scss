@@ -1,6 +1,6 @@
 .loader-1 {
 	height: 32px;
-	width: 32px;
+    width: 32px;
 	-webkit-animation: loader-1-1 4.8s linear infinite;
 	        animation: loader-1-1 4.8s linear infinite;
 }
@@ -55,12 +55,4 @@
 	0%   { transform: rotate(-140deg); }
 	50%  { transform: rotate(-160deg); }
 	100% { transform: rotate(140deg); }
-}
-/* Layout */
-.center {
-	display: block;
-	position: absolute;
-	top: 0; left: 0;
-	bottom: 0; right: 0;
-	margin: auto;
 }

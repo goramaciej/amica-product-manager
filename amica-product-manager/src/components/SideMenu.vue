@@ -62,7 +62,7 @@ export default {
     },
     watch: {
         $route(to, from) {
-            if (this.classActive){
+            if (this.classActive) {
                 this.hideMobileMenu();
             }
         }
@@ -111,10 +111,10 @@ nav {
 
 .bm-burger-button {
     position: fixed;
-    width: 50px;
-    height: 40px;
+    width: 40px;
+    height: 30px;
     right: 20px;
-    top: 10px;
+    top: 15px;
     cursor: pointer;
     z-index: 1500;
     background-color: $amicared;
@@ -127,15 +127,15 @@ nav {
     }
     .bm-burger-bars {
         background-color: white;
-        height: 3px;
-        width: 35px;
-        margin: 2px auto 4px;
+        height: 2px;
+        width: 25px;
+        margin: 2px auto 2px;
     }
 }
 .cross-style {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: $bm;
+    left: $bm;
     cursor: pointer;
 }
 .bm-cross {
