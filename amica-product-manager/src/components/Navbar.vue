@@ -1,14 +1,11 @@
 <template>
     <header :class="{ 'header--hidden': !showNavbar }">
-        <div class="logo" @click="homepage">
-            <img src="../images/amica-logo.png" alt="logo-amica" />
-        </div>
-        
-        <nav class="desktop-menu">
-            <router-link tag="li" :class="{'independent-link': productsInRouter}" :to="{ name: 'products', params: { category: 'wszystkie' }}">Produkty</router-link>
-            <router-link tag="li" :to="{ name: 'addproduct'}">Dodaj nowy produkt</router-link>
+        <img src="../images/amica-logo.png" alt="logo-amica" />
+        <nav>
+            <router-link tag="li" :class="{'independent-link': productsInRouter}" to="/products">Produkty</router-link>
+            <router-link tag="li" to="/products/addproduct">Dodaj nowy produkt</router-link>
             <!-- <router-link tag="li" to="/categories_manager">Zarządzanie kategoriami</router-link> -->
-            <router-link tag="li" :to="{ name: 'featuresManager'}" 
+            <router-link tag="li" to="/features-manager" 
             :class="{'independent-link': featuresInRouter}">Zarządzanie funkcjami</router-link>
         </nav>
     </header>
@@ -41,11 +38,8 @@ export default {
             // Set the current scroll position as the last scroll position
             this.lastScrollPosition = currentScrollPosition;
         },
-        homepage(){
-            this.$router.push({ name:'home'});
-        },
         checkRouter(){
-            this.productsInRouter = this.$route.path.includes('product') && !this.$route.path.includes('addproduct');
+            this.productsInRouter = this.$route.path.includes('products') && !this.$route.path.includes('addproduct');
             this.featuresInRouter = this.$route.path.includes('features');
         }
 
@@ -73,33 +67,28 @@ header {
     background: $amicared;
     position: fixed;
     box-shadow: 0 2px 15px rgba(71, 120, 120, 0.5);
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     transition: 0.4s all ease-out;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
-.logo{
-    cursor: pointer;
-    margin-left: 7px;
+header.header--hidden {
+    box-shadow: none;
+    transform: translate3d(0, -100%, 0);
 }
-.desktop-menu{
-    display: none;
-    margin-right: $bm;
+nav {
     color: white;
-    @media screen and (min-width: $break-small-menu) {
-        display: block;
-    }
-
-    li {        
+    li {
         display: inline-block;
         position: relative;
         cursor: pointer;
         list-style-type: none;
-        margin-left: $bm;
+        margin: 15px;
+        font-family: "Lato";
         text-transform: uppercase;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 700;
 
         &:after {
@@ -119,9 +108,5 @@ header {
             left: 0; 
         }
     }
-}
-header.header--hidden {
-    box-shadow: none;
-    transform: translateY(-100%);
 }
 </style>
