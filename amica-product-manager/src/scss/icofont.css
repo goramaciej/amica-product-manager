@@ -1,0 +1,33 @@
+@font-face
+{ 
+    font-family: "IcoFont";
+    font-weight: normal;
+    font-style: "Regular";
+    src: url("../fonts/icofont.woff2") format("woff2"),
+    url("../fonts/icofont.woff") format("woff");
+}
+
+[class^="icofont-"], [class*=" icofont-"]
+{
+  font-family: 'IcoFont' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+}
+
+.icofont-search-2:before
+{
+  content: "\ed12";
+}
+
+.icofont-edit-alt:before
+{
+  content: "\eded";
+}
+
+.icofont-close-circled:before
+{
+  content: "\eedd";
+}
+	
