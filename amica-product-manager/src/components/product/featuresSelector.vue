@@ -63,7 +63,8 @@ export default {
             dragging: false,
             movedAfterDrag: true,
 
-            meDragging: false
+            meDragging: false,
+        
         };
     },
     computed: {
@@ -85,6 +86,9 @@ export default {
         },
         mouseEnter(ev) {
             this.tooltip.textContent = ev.target.dataset.tooltip;
+
+            
+
             if (!this.dragging){
                 this.tooltip.classList.add("mactive");
             }
@@ -97,12 +101,11 @@ export default {
             this.tooltip.style.top = "-2000px";
         },
         endDrag(ev) {
-            console.log('stopDragging');
             this.dragging = false;
         },
         mouseMoving(ev) {
-            let y = ev.pageY ;
-            let x = ev.pageX + 10;
+            let y = ev.pageY - 40;
+            let x = ev.pageX - 20 - this.container.getBoundingClientRect().left;
             if (ev.target.dataset.tooltiplocation=='right'){
                 x = ev.pageX - 200;
             }

@@ -1,7 +1,7 @@
 <template>
     <div class="amicaform">
         <h4>Dodaj nową funkcję:</h4>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && feature.title.length < 2">Wprowadź nazwę funkcji (min. 2 znaki)</p>
         <div class="form-group">
             <input
@@ -12,7 +12,7 @@
                 v-model="feature.title"
             />
         </div>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && feature.description.length<1">Wprowadź opis funkcji</p>
         <div class="form-group">
             <textarea
@@ -26,9 +26,9 @@
             ></textarea>
         </div>
         <h5>Przeciągnij z innego okna zdjęcie obrazujące funkcję oraz jej ikonę:</h5>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && (feature.iconURL.length==0 || feature.imageURL.length==0)">Funkcja musi posiadać ikonę i zdjęcie</p>
-        <div class="imagePlaceholders">            
+        <div class="image-placeholders">            
             <div id="drop2" class="drop dashed-background" @dragover.prevent @drop="imageDrop">
                 <img class="product-image" :src="feature.imageURL" />
             </div>
@@ -117,7 +117,7 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/variables.scss";
 
-.validateText{
+.validate-text{
     text-align: left;
     color: red;
     font-size: 13px;
@@ -125,7 +125,7 @@ export default {
     font-style: italic;
 }
 
-.imagePlaceholders{
+.image-placeholders{
     text-align: center;
     @media screen and (min-width: $break-small) {
         text-align: left;

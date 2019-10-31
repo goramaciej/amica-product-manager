@@ -24,7 +24,7 @@ export default {
     display: flex;
     flex-direction: column;
     max-width: 360px;
-    padding: $bm 30px $bm 0;
+    padding: $bm $bm $bm 0;
     //padding-left: 0;
     //max-height: 500px;
     //overflow: hidden;
@@ -52,8 +52,9 @@ export default {
         padding-left: $bm;
     }
     .feature-inner {
+        padding-left: $bm;
         p {
-            font-size: 15px;
+            font-size: 14px;
             text-align: justify;
             line-height: 1.4;
         }

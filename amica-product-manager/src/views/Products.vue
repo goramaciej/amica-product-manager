@@ -24,9 +24,9 @@
                             ref="searchInput"
                         />
                         <i class="icofont-close-circled icon" v-if="clearSearchButton" @click="clearSearch"></i>
-                        <div class="searchResults" >
-                            <div v-if="searchItemWarning.length > 0" class="searchResult disabled"> {{ searchItemWarning }}</div>
-                            <div class="searchResult" v-for="(item, index) in searchArr" :key="index" @click="openSearchResult(item)">{{ item.description }}</div>
+                        <div class="search-results" >
+                            <div v-if="searchItemWarning.length > 0" class="search-result disabled"> {{ searchItemWarning }}</div>
+                            <div class="search-result" v-for="(item, index) in searchArr" :key="index" @click="openSearchResult(item)">{{ item.description }}</div>
                             
                         </div>
                     </div>
@@ -221,7 +221,7 @@ export default {
             this.$refs.searchInput.value = "";
         },
         openSearchResult(item){
-            this.$router.push({ name: 'product', params: { id: item.item.product_id }})
+            this.$router.push({ name: 'product', params: { id: item.product_id }})
         }
         
     },
@@ -303,13 +303,13 @@ select option:hover {
     //box-shadow: 0 0 10px 100px #1882A8 inset;
     font-size: 25px;
 }
-.searchResults{
+.search-results{
     position: absolute;
     display: flex;
     flex-flow: column nowrap;
     overflow-y: auto; 
     max-height: calc(100vh - 240px);
-    .searchResult {
+    .search-result {
         white-space: nowrap;
         max-width: 90vw;
         min-height: 30px;

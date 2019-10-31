@@ -1,7 +1,7 @@
 <template>
     <div class="amicaform">
         <h4>Dodaj nowy produkt:</h4>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && productData.productName.length<3">Wprowadź nazwę produktu (min. 2 znaki)</p>
         <div class="form-group">
             <input
@@ -13,7 +13,7 @@
             />
         </div>
         <h5>Wybierz kategorię i podkategorię produktu:</h5>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && productData.cat == 0">Proszę wybrać kategorię produktu</p>
         <select-category @change="categorySelected" :key="'a' + componentKey"/>
         <h5>Dodaj opis produktu:</h5>
@@ -29,11 +29,11 @@
             ></textarea>
         </div>
         <h5>Dodaj zdjęcia produktu przeciągając je z innego okna przeglądarki:</h5>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && productData.images.length<1">Produkt musi posiadać minimum 1 zdjęcie</p>
         <add-image @imageadded="addImage" :images="productData.images" :key="'b' + componentKey"/>
         <h5>Przeciągnij do prawej ramki funkcje produktu:</h5>
-        <p class="validateText" 
+        <p class="validate-text" 
             v-if="showValidation && productData.features.length<1">Produkt musi posiadać minimum 1 funkcję</p>
         <select-features @featuresChange="featuresChange" :key="'c' + componentKey"/>
         <div class="buttons">
@@ -142,7 +142,7 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/variables.scss";
 
-.validateText{
+.validate-text{
     text-align: left;
     color: red;
     font-size: 13px;

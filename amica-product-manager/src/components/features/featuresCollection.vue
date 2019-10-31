@@ -58,7 +58,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     margin: $bm;
-    margin-right: -10px;
+    margin-right: 0;
 }
 .flex-locator {
     flex: 1 0 260px;

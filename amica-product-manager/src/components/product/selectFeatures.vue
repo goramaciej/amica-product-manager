@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="featuresFrame">
-            <div v-for="(item, key, index) in features" :key="index" class="featureElement">
+        <div class="features-frame">
+            <div v-for="(item, key, index) in features" :key="index" class="feature-element">
                 <img :src="item.iconURL" />
             </div>
         </div>
@@ -33,12 +33,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.featuresFrame {
+.features-frame {
     width: 50%;
     margin-left: -5px;
     display: flex;
     flex-flow: row wrap;
-    .featureElement {
+    .feature-element {
         // display: inline-block;
         margin: 5px;
         width: 40px;
