@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bm-menu" :class="{active: classActive}">
+        <div class="bm-menu" :class="{active: classActive}" v-touch:swipe="swipeHandler">
             <nav>
                 <!-- <li @click="gotToPage('home')">Strona Główna</li>
                 <li @click="gotToPage('products')">Produkty</li>
@@ -58,7 +58,13 @@ export default {
         gotToPage(pageName) {
             this.hideMobileMenu();
             this.$router.push({ name: pageName });
+        },
+        swipeHandler(ev){
+            if (ev == 'right'){
+                this.hideMobileMenu();
+            }
         }
+
     },
     watch: {
         $route(to, from) {
@@ -83,7 +89,6 @@ nav {
         cursor: pointer;
         list-style-type: none;
         margin: 15px;
-        font-family: "Lato";
         text-transform: uppercase;
         font-size: 16px;
         font-weight: 700;

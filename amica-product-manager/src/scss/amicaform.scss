@@ -50,3 +50,29 @@
         object-fit: cover;
     }
 }
+
+.amica-button {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 12px 22px;
+    cursor: pointer;
+    background: rgb(227, 19, 41);
+    transition-duration: 0.2s;
+    box-shadow: 0 0 0 0px transparent;
+    margin: 1rem;
+    //padding: 8px;
+    font-weight: 700;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        transform: scale(1.1);
+    }
+    & a:hover {
+        color: green;
+    }
+}

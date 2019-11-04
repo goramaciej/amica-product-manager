@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <side-menu @hideMobileMenu="mobOff" @showMobileMenu="mobOn"/>
+        <side-menu @hideMobileMenu="mobOff" @showMobileMenu="mobOn" />
         <main id="page-wrap">
             <navbar />
             <div class="top-spacer">A</div>
@@ -15,13 +15,13 @@
 
 <script>
 import Navbar from "./components/Navbar.vue";
-//import { Reveal } from "vue-burger-menu";
 import SideMenu from "./components/SideMenu.vue";
+
 export default {
-    data(){
+    data() {
         return {
-            mobileMenuVisible: false,
-        }
+            mobileMenuVisible: false
+        };
     },
     created() {
         this.$store.dispatch("retrieveCategories");
@@ -30,14 +30,13 @@ export default {
     },
     components: {
         Navbar,
-        //Reveal
         SideMenu
     },
     methods: {
-        mobOff(){
+        mobOff() {
             this.mobileMenuVisible = false;
         },
-        mobOn(){
+        mobOn() {
             this.mobileMenuVisible = true;
         }
     }
@@ -73,32 +72,7 @@ export default {
         pointer-events: none;
     }
 }
-.amica-button {
-    display: inline-block;
-    font-family: "Lato";
-    text-transform: uppercase;
-    font-size: 14px;
-    color: white;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    padding: 12px 22px;
-    cursor: pointer;
-    background: rgb(227, 19, 41);
-    transition-duration: 0.2s;
-    box-shadow: 0 0 0 0px transparent;
-    margin: 1rem;
-    //padding: 8px;
-    font-weight: 700;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-        transform: scale(1.1);
-    }
-    & a:hover {
-        color: green;
-    }
-}
+
 textarea:focus,
 input:focus,
 input[type]:focus,
@@ -124,6 +98,6 @@ input[type]:focus,
 *,
 :before,
 :after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 </style>

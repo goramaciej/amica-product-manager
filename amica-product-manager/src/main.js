@@ -5,8 +5,11 @@ import store from './components/store/store.js';
 import { ObserveVisibility } from 'vue-observe-visibility'
 import VueAgile from 'vue-agile'
 import axios from 'axios';
+import Vue2TouchEvents from 'vue2-touch-events';
 
-Vue.use(VueAgile)
+Vue.use(VueAgile);
+Vue.use(Vue2TouchEvents);
+
 
 axios.defaults.baseURL = 'https://amica-prod.firebaseio.com';
 
@@ -21,7 +24,7 @@ axios.defaults.baseURL = 'https://amica-prod.firebaseio.com';
 });*/
 
 Vue.config.productionTip = false;
-Vue.directive('observe-visibility', ObserveVisibility)
+Vue.directive('observe-visibility', ObserveVisibility);
 
 new Vue({
     router,

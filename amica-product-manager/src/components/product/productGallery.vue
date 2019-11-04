@@ -8,6 +8,7 @@
         </div>
         <div class="image">
         <transition name="fade" mode="out-in">
+            
             <img class="res-image" :src="currentImage" :key="clicks" title="goTop" alt="" />
         </transition>
         </div>

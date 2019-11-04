@@ -7,6 +7,7 @@ import AddNewFeature from './views/AddNewFeature.vue';
 import Product from './views/Product.vue';
 import Products from './views/Products.vue'
 import AddProduct from './views/AddProduct.vue';
+import Home from './views/Home.vue';
 
 Vue.use(Router)
 
@@ -20,8 +21,8 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            redirect: '/products/wszystkie'
-            
+            component: Home,
+            //redirect: '/products/wszystkie'        
         },
         {
             path: '/products/:category',

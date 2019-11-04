@@ -7,12 +7,13 @@ $tt-background-color: #e31329;
 
 .amica-tooltip{
     padding: 10px 18px;
-    min-width: 150px;
-    max-width: 200px;
-    width: max-content;
-    width: -moz-max-content;
+    width: 180px;
+    // min-width: 150px;
+    // max-width: 200px;
+    // width: max-content;
+    // width: -moz-max-content;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 12px;
     color: white;
     background-color: $tt-background-color;//rgba(0, 157, 255, 0.9);
     border: 1px solid white;
