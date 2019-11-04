@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bm-menu" :class="{active: classActive}" v-touch:swipe="swipeHandler">
+        <div class="bm-menu" :class="{active: classActive}" >
             <nav>
                 <!-- <li @click="gotToPage('home')">Strona Główna</li>
                 <li @click="gotToPage('products')">Produkty</li>
