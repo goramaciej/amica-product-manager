@@ -9,13 +9,14 @@
                     :key="index"
                     @click="thumbClicked(index)"
                 >
-                    <img class="res-image" :src="image" alt="product-image" />
+                    <!-- <img class="res-image" :src="image" alt="product-image" /> -->
+                    <lazy-image class="res-image" :imgSrc="image" :isResponsive="false"/>
                 </div>
             </div>
-            <div class="image" v-touch:swipe="swipeHandler" v-some>
+            <div class="big-image" v-touch:swipe="swipeHandler">
                 <transition name="fade" mode="out-in">
                     <!-- <img class="res-image" :src="currentImage" :key="clicks" title="goTop" alt /> -->
-                    <lazy-image :imgSrc="currentImage" :key="clicks" />
+                    <lazy-image class="res-image" :imgSrc="currentImage" :isResponsive="false" :key="clicks" />
                 </transition>
             </div>
         </div>
@@ -82,6 +83,9 @@ export default {
 .gallery-wrapper {
     display: flex;
     width: 100%;
+    @media screen and (min-width: $break-small-menu) {
+        height: 340px;
+    }
 
     .thumbs {
         margin: 0 $bm;
@@ -101,7 +105,7 @@ export default {
         }
     }
 
-    .image {
+    .big-image {
         flex: 1 1 200px;
         max-height: 340px;
         margin-right: $bm;

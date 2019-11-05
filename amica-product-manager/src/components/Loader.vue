@@ -12,7 +12,4 @@
 
 <style lang="scss" scoped>
 @import "../scss/loader.scss";
-.loader-1{
-    margin-top: 100px;
-}
 </style>

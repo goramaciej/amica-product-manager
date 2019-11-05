@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import Loader from "../Loader.vue";
 export default {
     name: "productItem",
     data() {
@@ -30,9 +29,6 @@ export default {
     props: {
         product: Object,
         index: Number
-    },
-    components: {
-        Loader
     },
     methods: {
         visibilityChanged(isVisible, entry) {

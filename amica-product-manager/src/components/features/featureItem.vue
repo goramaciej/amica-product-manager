@@ -1,7 +1,8 @@
 <template>
     <div class="feature">
         <img :src="feature.iconURL" class="feature-icon" alt />
-        <img :src="feature.imageURL" class="img-responsive" alt />
+        <!-- <img :src="feature.imageURL" class="img-responsive" alt /> -->
+        <lazy-image class="img-responsive" :class="{active: imageLoaded}" :imgSrc="feature.imageURL" @imageLoaded="imageLoadedF"/>
         <div class="feature-inner">
             <h3>{{ feature.title }}</h3>
             <p>{{ feature.description }}</p>
@@ -10,9 +11,23 @@
 </template>
 
 <script>
+import LazyImage from '../LazyImage.vue'
 export default {
     name: "featureItem",
-    props: ["feature"]
+    props: ["feature"],
+    data(){
+        return {
+            imageLoaded: false
+        }
+    },
+    components: {
+        LazyImage
+    },
+    methods: {
+        imageLoadedF(){
+            this.imageLoaded = true;
+        }
+    }
 };
 </script>
 
@@ -25,13 +40,6 @@ export default {
     flex-direction: column;
     max-width: 360px;
     padding: $bm $bm $bm 0;
-    //padding-left: 0;
-    //max-height: 500px;
-    //overflow: hidden;
-    // @media screen and (min-width: 600px) {
-    //     flex-basis: 300px;
-    //     padding: 40px 30px 0 30px;
-    // }
     .feature-icon {
         position: absolute;
         top: 0px;
@@ -45,11 +53,19 @@ export default {
     }
     .img-responsive {
         display: block;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
+        height: 80px;
+        max-height: 80px;
+        // max-width: 100%;
+        // max-height: 100%;
+        // width: auto;
+        // height: auto;
         padding-left: $bm;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        &.active {
+            height: auto;
+            max-height: 240px;
+        }
     }
     .feature-inner {
         padding-left: $bm;

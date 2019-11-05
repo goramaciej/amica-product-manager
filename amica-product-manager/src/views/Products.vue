@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="products">
-            <loader v-if="!allProducts.length>0"/>
+            <loader v-if="!allProducts.length>0" class="loader"/>
             <h4 v-if="products.length==0 && allProducts.length>0">Brak produktów w tej kategorii</h4>
             <product-item
                 v-for="(product, index) in products"
@@ -298,6 +298,9 @@ $filtersWidth: 250px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
+    .loader{
+        margin-top: 100px;
+    }
 }
 select option:hover {
     //box-shadow: 0 0 10px 100px #1882A8 inset;
