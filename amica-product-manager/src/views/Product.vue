@@ -97,11 +97,13 @@ export default {
         h4 {
             text-align: left;
             font-size: 18px;
+            
         }
     }
     .features {
         grid-area: features;
         overflow: hidden;
+
     }
 
     @media screen and (min-width: $break-small-menu) {

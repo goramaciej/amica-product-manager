@@ -196,7 +196,7 @@ export default {
 
         searchTextChanged(ev){
             let tex = ev.target.value;
-            if (tex.length > 2){
+            if (tex.length > 1){
                 this.searchArr = this.allProducts.filter( item => {
                     return (item.description.toLowerCase().includes(tex.toLowerCase()));
                 });

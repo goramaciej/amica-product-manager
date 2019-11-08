@@ -104,7 +104,7 @@ export default {
         position: relative;
         left: -2px;
         top: -4px;
-        object-fit: cover;
+        object-fit: contain;
         width: 104%;
         height: 104%;
         z-index: 10;
