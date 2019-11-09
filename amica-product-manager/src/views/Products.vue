@@ -82,20 +82,15 @@ export default {
         },
         products: {
             get: function() {
-                if (this.selectedCategory == 0) {
+                if (this.selectedCategory === 0) {
                     return this.allProducts;
                 } else {
-                    return this.allProducts.filter(el => {
-                        return el.cat == this.selectedCategory;
-                    });
+                    return this.allProducts.filter(el => el.cat === this.selectedCategory);
                 }
             }
         },
         categories() {
-            const cats = JSON.parse(
-                JSON.stringify(this.$store.getters.categories)
-            );
-            return cats;
+            return JSON.parse(JSON.stringify(this.$store.getters.categories));
         },
     },
     methods: {
@@ -118,79 +113,31 @@ export default {
             }
             this.showArr = [];
         },
-        catSelected(ev) {            
-            switch (ev.target.value) {
-                case "Wszystkie":
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "wszystkie" }
-                    });
-                    break;
-                case "Lodówki":
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "lodowki" }
-                    });
-                    break;
-                case "Kuchnie wolnostojące":
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "kuchnie" }
-                    });
-                    break;
-                case "Piekarniki":
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "piekarniki" }
-                    });
-                    break;
-                case "Zmywarki":
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "zmywarki" }
-                    });
-                    break;
-                case "Odkurzacze":
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "odkurzacze" }
-                    });
-                    break;
+        catSelected(ev) {
+            const obj = this.categories.find( el => el.name === ev.target.value);
+            if(obj){                
+                this.$router.push({
+                    name: "products",
+                    params: { category: obj.alias }
+                });
+            }else{
+                this.$router.push({
+                    name: "products",
+                    params: { category: "wszystkie" }
+                });
             }
         },
         changeCategory() {
             this.keyNum++;
             this.registeredItems = [];
-            switch (this.$route.params.category) {
-                case "wszystkie":
-                    this.selectedCategory = 0;
-                    this.categoryName = "Wszystkie";
-                    break;
-                case "lodowki":
-                    this.selectedCategory = 1;
-                    this.categoryName = "Lodówki";
-                    break;
-                case "kuchnie":
-                    this.selectedCategory = 2;
-                    this.categoryName = "Kuchnie wolnostojące";
-                    break;
-                case "piekarniki":
-                    this.selectedCategory = 3;
-                    this.categoryName = "Piekarniki";
-                    break;
-                case "zmywarki":
-                    this.selectedCategory = 4;
-                    this.categoryName = "Zmywarki";
-                    break;
-                case "odkurzacze":
-                    this.selectedCategory = 5;
-                    this.categoryName = "Odkurzacze";
-                    break;
-                default:
-                    this.$router.push({
-                        name: "products",
-                        params: { category: "wszystkie" }
-                    });
+
+            const obj = this.categories.find( el => el.alias === this.$route.params.category);
+            if (obj){
+                this.selectedCategory = 1;
+                this.categoryName = obj.name;
+            }else{
+                this.selectedCategory = 0;
+                this.categoryName = "Wszystkie";
             }
         },
 

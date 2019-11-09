@@ -23,10 +23,9 @@ export default {
         onDrop(evt){
             evt.stopPropagation();
             evt.preventDefault();
-            var imageUrl = evt.dataTransfer.getData("text/html");
-             var rex = /src="?([^"\s]+)"?\s*/;
-            var url, res;
-            url = rex.exec(imageUrl);
+            let imageUrl = evt.dataTransfer.getData("text/html");
+            let rex = /src="?([^"\s]+)"?\s*/;
+            let url = rex.exec(imageUrl);
             this.$emit('imageadded', url[1]);
         }
     }

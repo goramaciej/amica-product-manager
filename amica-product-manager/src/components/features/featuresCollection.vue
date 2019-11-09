@@ -39,7 +39,6 @@ export default {
                 featuresData = this.$store.getters.features;
             } else {
                 if (this.features) {
-                    //var result = arr.map(person => ({ value: person.id, text: person.name }));
                     featuresData = this.$store.getters.features.filter(el =>
                         this.features.includes(el.id)
                     );

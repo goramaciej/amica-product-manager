@@ -34,7 +34,6 @@ export default {
             if (currentScrollPosition < 0) {
                 return;
             }
-            // Here we determine whether we need to show or hide the navbar
             this.showNavbar =
                 currentScrollPosition < this.lastScrollPosition ||
                 currentScrollPosition < this.headerHeight;
@@ -42,7 +41,9 @@ export default {
             this.lastScrollPosition = currentScrollPosition;
         },
         homepage(){
-            this.$router.push({ name:'home'});
+            if (this.$router.currentRoute.name != 'home'){
+                this.$router.push({ name:'home'});
+            }            
         },
         checkRouter(){
             this.productsInRouter = this.$route.path.includes('product') && !this.$route.path.includes('addproduct');
