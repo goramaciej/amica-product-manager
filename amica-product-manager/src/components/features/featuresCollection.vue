@@ -22,31 +22,28 @@
 </template>
 
 <script>
-import featureItem from "./featureItem.vue";
+import featureItem from './featureItem.vue';
+
 export default {
-    name: "featuresCollection",
-    props: {
-        features: Array,
-        showAllFeatures: Boolean
+  name: 'featuresCollection',
+  props: {
+    features: Array,
+    showAllFeatures: Boolean,
+  },
+  components: {
+    featureItem,
+  },
+  computed: {
+    fetchedFeatures() {
+      let featuresData = [];
+      if (this.showAllFeatures) {
+        featuresData = this.$store.getters.features;
+      } else if (this.features) {
+        featuresData = this.$store.getters.features.filter((el) => this.features.includes(el.id));
+      }
+      return featuresData;
     },
-    components: {
-        featureItem
-    },
-    computed: {
-        fetchedFeatures() {
-            let featuresData = [];
-            if (this.showAllFeatures) {
-                featuresData = this.$store.getters.features;
-            } else {
-                if (this.features) {
-                    featuresData = this.$store.getters.features.filter(el =>
-                        this.features.includes(el.id)
-                    );
-                }
-            }
-            return featuresData;
-        }
-    }
+  },
 };
 </script>
 

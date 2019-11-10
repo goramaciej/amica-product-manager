@@ -43,68 +43,69 @@
     </div>
 </template>
 <script>
-import draggable from "vuedraggable";
+import draggable from 'vuedraggable';
+
 export default {
-    name: "featuresManager",
-    display: "Two Lists",
-    order: 1,
-    components: {
-        draggable
-    },
-    data() {
-        return {
-            selectedItems: [],
+  name: 'featuresManager',
+  display: 'Two Lists',
+  order: 1,
+  components: {
+    draggable,
+  },
+  data() {
+    return {
+      selectedItems: [],
 
-            tooltip: null,
-            container: null,
-            dragging: false,
-            movedAfterDrag: true,
-        };
+      tooltip: null,
+      container: null,
+      dragging: false,
+      movedAfterDrag: true,
+    };
+  },
+  computed: {
+    features() {
+      return this.$store.getters.features;
     },
-    computed: {
-        features() {
-            return this.$store.getters.features;
-        }
+  },
+  mounted() {
+    this.tooltip = document.querySelector('#features-tooltip');
+    this.container = document.querySelector('#features-manager-container');
+  },
+
+  methods: {
+    log(ev) {
+
     },
-    mounted() {
-        this.tooltip = document.querySelector("#features-tooltip");
-        this.container = document.querySelector("#features-manager-container");
+    mouseContainerMoving(ev) {
+      if (!this.movedAfterDrag) this.movedAfterDrag = true;
     },
+    mouseEnter(ev) {
+      this.tooltip.textContent = ev.target.dataset.tooltip;
+      if ((!this.dragging) && (this.movedAfterDrag)) {
+        this.tooltip.classList.add('mactive');
+      }
+    },
+    mouseLeave() {
+      this.tooltip.classList.remove('mactive');
+    },
+    startDrag(ev) {
+      this.dragging = true;
+    },
+    endDrag(ev) {
+      this.dragging = false;
+      this.movedAfterDrag = false;
+    },
+    mouseMoving(ev) {
+      const y = ev.pageY;
+      this.tooltip.style.top = `${y}px`;
 
-    methods: {
-        log: function(ev){
-
-        },
-        mouseContainerMoving: function(ev) {
-            if (!this.movedAfterDrag) this.movedAfterDrag = true;
-        },
-        mouseEnter(ev) {
-            this.tooltip.textContent = ev.target.dataset.tooltip;
-            if ((!this.dragging) && (this.movedAfterDrag)) {
-                this.tooltip.classList.add("mactive");
-            }
-        },
-        mouseLeave() {
-            this.tooltip.classList.remove("mactive");
-        },
-        startDrag(ev) {
-            this.dragging = true;
-        },
-        endDrag(ev) {
-            this.dragging = false;
-            this.movedAfterDrag = false;
-        },
-        mouseMoving(ev) {
-            let y = ev.pageY ;
-            this.tooltip.style.top = y + "px";
-
-            let x = ev.pageX + 10;
-            if (ev.target.dataset.tooltiplocation=='right'){
-                x = ev.pageX - 200;
-            }
-            this.tooltip.style.left = x + "px";
-        }
-    }
+      let x = ev.pageX + 10;
+      if (ev.target.dataset.tooltiplocation == 'right') {
+        x = ev.pageX - 200;
+      }
+      this.tooltip.style.left = `${x}px`;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

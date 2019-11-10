@@ -24,57 +24,56 @@
 </template>
 
 <script>
-import LazyImage from '../LazyImage.vue'
+import LazyImage from '../LazyImage.vue';
+
 export default {
-    name: "productGallery",
-    data() {
-        return {
-            currentImageNum: 0,
-            clicks: 0
-        };
+  name: 'productGallery',
+  data() {
+    return {
+      currentImageNum: 0,
+      clicks: 0,
+    };
+  },
+  props: {
+    images: {
+      type: Array,
+      required: true,
     },
-    props: {
-        images: {
-            type: Array,
-            required: true
+  },
+  components: {
+    LazyImage,
+  },
+  computed: {
+    currentImage() {
+      return this.images ? this.images[this.currentImageNum] : '';
+    },
+  },
+  methods: {
+    thumbClicked(index) {
+      if (index != this.currentImageNum) {
+        this.clicks++;
+        this.currentImageNum = index;
+      }
+    },
+    canShowActive(index) {
+      return index === this.currentImageNum;
+    },
+    swipeHandler(ev) {
+      this.clicks++;
+      const num = this.currentImageNum;
+      if (ev == 'right') {
+        if (num - 1 < 0) {
+          this.currentImageNum = this.images.length - 1;
+        } else {
+          this.currentImageNum--;
         }
+      } else if (num + 1 >= this.images.length) {
+        this.currentImageNum = 0;
+      } else {
+        this.currentImageNum++;
+      }
     },
-    components: {
-        LazyImage
-    },
-    computed: {
-        currentImage() {
-            return this.images ? this.images[this.currentImageNum] : "";
-        }
-    },
-    methods: {
-        thumbClicked(index) {
-            if (index != this.currentImageNum) {
-                this.clicks++;
-                this.currentImageNum = index;
-            }
-        },
-        canShowActive(index) {
-            return index === this.currentImageNum;
-        },
-        swipeHandler(ev) {
-            this.clicks++;
-            let num = this.currentImageNum;
-            if (ev == "right") {
-                if (num - 1 < 0) {
-                    this.currentImageNum = this.images.length - 1;
-                } else {
-                    this.currentImageNum--;
-                }
-            } else {
-                if (num + 1 >= this.images.length) {
-                    this.currentImageNum = 0;
-                } else {
-                    this.currentImageNum++;
-                }
-            }
-        }
-    }
+  },
 };
 </script>
 

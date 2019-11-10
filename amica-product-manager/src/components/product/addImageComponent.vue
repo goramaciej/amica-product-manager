@@ -1,10 +1,10 @@
 <template>
         <div
-            class="drop dashed-background"  
-            @dragover.prevent 
+            class="drop dashed-background"
+            @dragover.prevent
             @drop="onDrop"
         >
-            <img v-for="(url, key, index) in images" 
+            <img v-for="(url, key, index) in images"
                     :key="index"
                     class="product-image"
                     :src="url" />
@@ -15,20 +15,20 @@
 
 <script>
 export default {
-    name: "addImage",
-    props: {
-        images:Array
+  name: 'addImage',
+  props: {
+    images: Array,
+  },
+  methods: {
+    onDrop(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      const imageUrl = evt.dataTransfer.getData('text/html');
+      const rex = /src="?([^"\s]+)"?\s*/;
+      const url = rex.exec(imageUrl);
+      this.$emit('imageadded', url[1]);
     },
-    methods: {
-        onDrop(evt){
-            evt.stopPropagation();
-            evt.preventDefault();
-            let imageUrl = evt.dataTransfer.getData("text/html");
-            let rex = /src="?([^"\s]+)"?\s*/;
-            let url = rex.exec(imageUrl);
-            this.$emit('imageadded', url[1]);
-        }
-    }
+  },
 };
 </script>
 
@@ -44,7 +44,7 @@ export default {
         justify-content:center;
         align-items: center;
     }
-    
+
     .product-image{
         height: 80px;
         padding: 0px;

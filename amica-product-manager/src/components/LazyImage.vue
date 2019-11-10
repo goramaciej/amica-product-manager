@@ -4,7 +4,7 @@
         v-observe-visibility="{
             callback: visibilityChanged,
         }"
-    >   
+    >
         <loader class="loader" v-if="!imageLoaded && itemVisible" />
         <transition name="image-transition">
             <img src="" alt="image" class="res-image" :class="{'not-responive': !isResponsive}" v-show="imageLoaded" />
@@ -13,54 +13,55 @@
 </template>
 
 <script>
-import Loader from "./Loader.vue";
+import Loader from './Loader.vue';
+
 export default {
-    name: "lazyImage",
-    data() {
-        return {
-            itemVisible: false,
-            imageElement: null,
-            imageLoaded: false,
-            wasVisible: false
-        };
+  name: 'lazyImage',
+  data() {
+    return {
+      itemVisible: false,
+      imageElement: null,
+      imageLoaded: false,
+      wasVisible: false,
+    };
+  },
+  props: {
+    imgSrc: String,
+    isResponsive: {
+      type: Boolean,
+      default: true,
     },
-    props: {
-        imgSrc: String,
-        isResponsive: {
-            type: Boolean,
-            default: true
+  },
+  components: {
+    Loader,
+  },
+  methods: {
+    visibilityChanged(isVisible, entry) {
+      if (isVisible && !this.wasVisible) {
+        this.wasVisible = true;
+        this.itemVisible = true;
+        this.loadImage();
+      }
+    },
+    loadImage() {
+      this.imageElement = this.$el.querySelector('.res-image');
+      if (this.imageElement) {
+        if (this.imgSrc) {
+          this.imageElement.addEventListener('load', (ev) => {
+            setTimeout(this.imageLoadedF(ev), 300);
+          });
+          // this.imageElement.addEventListener("error", (ev) => console.log(ev));
+          this.imageElement.src = this.imgSrc;
+        } else {
+          setTimeout(this.loadImage, 200);
         }
+      }
     },
-    components: {
-        Loader
+    imageLoadedF(ev) {
+      this.$emit('imageLoaded');
+      this.imageLoaded = true;
     },
-    methods: {
-        visibilityChanged(isVisible, entry) {
-            if (isVisible && !this.wasVisible){
-                this.wasVisible = true;
-                this.itemVisible = true;
-                this.loadImage();
-            }
-        },
-        loadImage(){
-            this.imageElement = this.$el.querySelector('.res-image');
-            if(this.imageElement){
-                if (this.imgSrc){
-                    this.imageElement.addEventListener("load", (ev) => {
-                        setTimeout(this.imageLoadedF(ev), 300);
-                    });
-                    //this.imageElement.addEventListener("error", (ev) => console.log(ev));
-                    this.imageElement.src = this.imgSrc;
-                }else{
-                    setTimeout(this.loadImage, 200);
-                }
-            }
-        },
-        imageLoadedF(ev){
-            this.$emit('imageLoaded');
-            this.imageLoaded = true;
-        }
-    },
+  },
 };
 </script>
 

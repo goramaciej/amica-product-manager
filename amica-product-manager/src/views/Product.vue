@@ -15,53 +15,52 @@
 </template>
 
 <script>
-import productGallery from "../components/product/productGallery.vue";
-import featuresCollection from "../components/features/featuresCollection.vue";
+import productGallery from '../components/product/productGallery.vue';
+import featuresCollection from '../components/features/featuresCollection.vue';
+
 export default {
-    name: "Product",
-    data() {
-        return {};
+  name: 'Product',
+  data() {
+    return {};
+  },
+  components: {
+    productGallery,
+    featuresCollection,
+  },
+  computed: {
+    productData() {
+      const pr = JSON.parse(
+        JSON.stringify(this.$store.getters.products),
+      ).find((el) => el.product_id == this.$route.params.id);
+      return pr;
     },
-    components: {
-        productGallery,
-        featuresCollection
+    productName() {
+      if (this.productData) {
+        return this.productData.productName;
+      }
+      return '';
     },
-    computed: {
-        productData() {
-            const pr = JSON.parse(
-                JSON.stringify(this.$store.getters.products)
-            ).find(el => el.product_id == this.$route.params.id);
-            return pr;
-        },
-        productName() {
-            if (this.productData) {
-                return this.productData.productName;
-            } else {
-                return "";
-            }
-        },
-        productDescription() {
-            if (this.productData) {
-                return this.productData.description.replace(
-                    this.productName,
-                    ""
-                );
-            } else {
-                return "";
-            }
-        },
-        featuresData() {
-            let featuresArray = [];
-            if (this.productData) {
-                featuresArray = this.productData.features;
-            }
-            return featuresArray;
-        },
-        getImages() {
-            return this.productData ? this.productData.images : [];
-        }
+    productDescription() {
+      if (this.productData) {
+        return this.productData.description.replace(
+          this.productName,
+          '',
+        );
+      }
+      return '';
     },
-    methods: {}
+    featuresData() {
+      let featuresArray = [];
+      if (this.productData) {
+        featuresArray = this.productData.features;
+      }
+      return featuresArray;
+    },
+    getImages() {
+      return this.productData ? this.productData.images : [];
+    },
+  },
+  methods: {},
 };
 </script>
 
@@ -97,7 +96,7 @@ export default {
         h4 {
             text-align: left;
             font-size: 18px;
-            
+
         }
     }
     .features {

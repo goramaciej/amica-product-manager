@@ -12,20 +12,21 @@
 </template>
 
 <script>
-import featuresCollection from "../components/features/featuresCollection.vue";
+import featuresCollection from '../components/features/featuresCollection.vue';
+
 export default {
-    name: "featuresManager",
-    data() {
-        return {};
+  name: 'featuresManager',
+  data() {
+    return {};
+  },
+  components: {
+    featuresCollection, // remember - set show-all-features on this component to true to get data from axios
+  },
+  methods: {
+    saveOnServer() {
+      this.$store.dispatch('sendFeatures');
     },
-    components: {
-        featuresCollection //remember - set show-all-features on this component to true to get data from axios
-    },
-    methods: {
-        saveOnServer(){
-            this.$store.dispatch('sendFeatures');
-        }
-    },
+  },
 };
 </script>
 

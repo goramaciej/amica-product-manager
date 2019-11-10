@@ -3,12 +3,12 @@
         <div class="logo" @click="homepage">
             <img src="../images/amica-logo.png" alt="logo-amica" />
         </div>
-        
+
         <nav class="desktop-menu">
             <router-link tag="li" :class="{'independent-link': productsInRouter}" :to="{ name: 'products', params: { category: 'wszystkie' }}">Produkty</router-link>
             <router-link tag="li" :to="{ name: 'addproduct'}">Dodaj nowy produkt</router-link>
             <!-- <router-link tag="li" to="/categories_manager">Zarządzanie kategoriami</router-link> -->
-            <router-link tag="li" :to="{ name: 'featuresManager'}" 
+            <router-link tag="li" :to="{ name: 'featuresManager'}"
             :class="{'independent-link': featuresInRouter}">Zarządzanie funkcjami</router-link>
         </nav>
     </header>
@@ -16,53 +16,51 @@
 
 <script>
 export default {
-    data() {
-        return {
-            showNavbar: true,
-            lastScrollPosition: 0,
-            headerHeight: 80,
-            productsInRouter: false,
-            featuresInRouter: false
-        };
+  data() {
+    return {
+      showNavbar: true,
+      lastScrollPosition: 0,
+      headerHeight: 80,
+      productsInRouter: false,
+      featuresInRouter: false,
+    };
+  },
+  methods: {
+    onScroll() {
+      // Get the current scroll position
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero
+      if (currentScrollPosition < 0) {
+        return;
+      }
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition
+                || currentScrollPosition < this.headerHeight;
+      // Set the current scroll position as the last scroll position
+      this.lastScrollPosition = currentScrollPosition;
     },
-    methods: {
-        onScroll() {
-            // Get the current scroll position
-            const currentScrollPosition =
-                window.pageYOffset || document.documentElement.scrollTop;
-            // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero
-            if (currentScrollPosition < 0) {
-                return;
-            }
-            this.showNavbar =
-                currentScrollPosition < this.lastScrollPosition ||
-                currentScrollPosition < this.headerHeight;
-            // Set the current scroll position as the last scroll position
-            this.lastScrollPosition = currentScrollPosition;
-        },
-        homepage(){
-            if (this.$router.currentRoute.name != 'home'){
-                this.$router.push({ name:'home'});
-            }            
-        },
-        checkRouter(){
-            this.productsInRouter = this.$route.path.includes('product') && !this.$route.path.includes('addproduct');
-            this.featuresInRouter = this.$route.path.includes('features');
-        }
+    homepage() {
+      if (this.$router.currentRoute.name != 'home') {
+        this.$router.push({ name: 'home' });
+      }
+    },
+    checkRouter() {
+      this.productsInRouter = this.$route.path.includes('product') && !this.$route.path.includes('addproduct');
+      this.featuresInRouter = this.$route.path.includes('features');
+    },
 
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll);
+    this.checkRouter();
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll);
+  },
+  watch: {
+    $route(to, from) {
+      this.checkRouter();
     },
-    mounted() {
-        window.addEventListener("scroll", this.onScroll);
-        this.checkRouter();
-    },
-    beforeDestroy() {
-        window.removeEventListener("scroll", this.onScroll);
-    },
-    watch: {
-        '$route' (to, from) {
-            this.checkRouter();
-        }
-    }
+  },
 };
 </script>
 
@@ -93,7 +91,7 @@ header {
         display: block;
     }
 
-    li {        
+    li {
         display: inline-block;
         position: relative;
         cursor: pointer;
@@ -115,9 +113,9 @@ header {
             transition: width 0.3s ease 0s, left 0.3s ease 0s;
             width: 0;
         }
-        &:hover:after, &.router-link-exact-active:after, &.independent-link:after { 
-            width: 100%; 
-            left: 0; 
+        &:hover:after, &.router-link-exact-active:after, &.independent-link:after {
+            width: 100%;
+            left: 0;
         }
     }
 }

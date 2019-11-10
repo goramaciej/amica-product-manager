@@ -2,10 +2,6 @@
     <div>
         <div class="bm-menu" :class="{active: classActive}" >
             <nav>
-                <!-- <li @click="gotToPage('home')">Strona Główna</li>
-                <li @click="gotToPage('products')">Produkty</li>
-                <li @click="gotToPage('featuresManager')">Zarządzanie funkcjami</li>-->
-
                 <router-link tag="li" :to="{ name: 'home'}">home</router-link>
                 <router-link
                     tag="li"
@@ -35,44 +31,46 @@
 
 <script>
 export default {
-    name: "SideMenu",
-    data() {
-        return {
-            classActive: false
-        };
+  name: 'SideMenu',
+  data() {
+    return {
+      classActive: false,
+    };
+  },
+  computed: {
+    scrollY() {
+      return document.body.style.top;
     },
-    computed: {
-        scrollY() {
-            return document.body.style.top;
-        }
+  },
+  methods: {
+    showMobileMenu() {
+      this.classActive = true;
+      // this.$emit("showMobileMenu");
+      this.$store.dispatch('showMobileMenu');
     },
-    methods: {
-        showMobileMenu() {
-            this.classActive = true;
-            this.$emit("showMobileMenu");
-        },
-        hideMobileMenu() {
-            this.classActive = false;
-            this.$emit("hideMobileMenu");
-        },
-        gotToPage(pageName) {
-            this.hideMobileMenu();
-            this.$router.push({ name: pageName });
-        },
-        swipeHandler(ev){
-            if (ev == 'right'){
-                this.hideMobileMenu();
-            }
-        }
+    hideMobileMenu() {
+      this.classActive = false;
+      // this.$emit("hideMobileMenu");
+      this.$store.dispatch('hideMobileMenu');
+    },
+    gotToPage(pageName) {
+      this.hideMobileMenu();
+      this.$router.push({ name: pageName });
+    },
+    swipeHandler(ev) {
+      if (ev == 'right') {
+        this.hideMobileMenu();
+      }
+    },
 
+  },
+  watch: {
+    $route(to, from) {
+      if (this.classActive) {
+        this.hideMobileMenu();
+      }
     },
-    watch: {
-        $route(to, from) {
-            if (this.classActive) {
-                this.hideMobileMenu();
-            }
-        }
-    }
+  },
 };
 </script>
 

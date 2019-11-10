@@ -11,23 +11,24 @@
 </template>
 
 <script>
-import LazyImage from '../LazyImage.vue'
+import LazyImage from '../LazyImage.vue';
+
 export default {
-    name: "featureItem",
-    props: ["feature"],
-    data(){
-        return {
-            imageLoaded: false
-        }
+  name: 'featureItem',
+  props: ['feature'],
+  data() {
+    return {
+      imageLoaded: false,
+    };
+  },
+  components: {
+    LazyImage,
+  },
+  methods: {
+    imageLoadedF() {
+      this.imageLoaded = true;
     },
-    components: {
-        LazyImage
-    },
-    methods: {
-        imageLoadedF(){
-            this.imageLoaded = true;
-        }
-    }
+  },
 };
 </script>
 

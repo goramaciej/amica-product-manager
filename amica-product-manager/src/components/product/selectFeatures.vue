@@ -12,23 +12,23 @@
 
 <script>
 export default {
-    name: "selectFeatures",
-    data() {
-        return {
-            selectedIds: [],    
-        };
+  name: 'selectFeatures',
+  data() {
+    return {
+      selectedIds: [],
+    };
+  },
+  computed: {
+    features() {
+      // use copy, not reference
+      return JSON.parse(JSON.stringify(this.$store.getters.features));
     },
-    computed: {
-        features(){
-            //use copy, not reference
-            return JSON.parse(JSON.stringify(this.$store.getters.features));
-        }
-    },
-    watch: {
-        /*features(val){
+  },
+  watch: {
+    /* features(val){
             console.log("features has changed");
-        }*/
-    }
+        } */
+  },
 };
 </script>
 

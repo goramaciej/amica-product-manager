@@ -27,7 +27,7 @@
                         <div class="search-results" >
                             <div v-if="searchItemWarning.length > 0" class="search-result disabled"> {{ searchItemWarning }}</div>
                             <div class="search-result" v-for="(item, index) in searchArr" :key="index" @click="openSearchResult(item)">{{ item.description }}</div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -50,137 +50,135 @@
 </template>
 
 <script>
-import productItem from "../components/product/productItem.vue";
-import loader from "../components/Loader.vue";
+import productItem from '../components/product/productItem.vue';
+import loader from '../components/Loader.vue';
+
 export default {
-    name: "Products",
-    data() {
-        return {
-            itemsBig: true,
-            registeredItems: [],
-            showArr: [],
-            categoryName: "Wszystkie",
-            selectedCategory: 0,
-            keyNum: 0,
-            selector: null,
+  name: 'Products',
+  data() {
+    return {
+      itemsBig: true,
+      registeredItems: [],
+      showArr: [],
+      categoryName: 'Wszystkie',
+      selectedCategory: 0,
+      keyNum: 0,
+      selector: null,
 
-            searchText: "Wyszukaj",
-            searchArr: [],
-            clearSearchButton: false,
-            searchItemWarning: ''
-        };
+      searchText: 'Wyszukaj',
+      searchArr: [],
+      clearSearchButton: false,
+      searchItemWarning: '',
+    };
+  },
+  components: {
+    productItem,
+    loader,
+  },
+  computed: {
+    allProducts() {
+      return JSON.parse(
+        JSON.stringify(this.$store.getters.products),
+      );
     },
-    components: {
-        productItem,
-        loader
-    },
-    computed: {
-        allProducts() {
-            return JSON.parse(
-                    JSON.stringify(this.$store.getters.products)
-                );
-        },
-        products: {
-            get: function() {
-                if (this.selectedCategory === 0) {
-                    return this.allProducts;
-                } else {
-                    return this.allProducts.filter(el => el.cat === this.selectedCategory);
-                }
-            }
-        },
-        categories() {
-            return JSON.parse(JSON.stringify(this.$store.getters.categories));
-        },
-    },
-    methods: {
-        registerItem(item) {
-            this.registeredItems.push(item);
-        },
-        addVisibleItemId(obj) {
-            if (this.showArr.length == 0) {
-                setTimeout(this.showArrayFilled, 200);
-            }
-            this.showArr.push(obj);
-        },
-        showArrayFilled() {
-            this.showArr.sort((a, b) => (a.index > b.index ? 1 : -1));
-            for (let i = 0; i < this.showArr.length; i++) {
-                let element = this.registeredItems.find(
-                    el => el.product.product_id === this.showArr[i].id
-                );
-                element.showMe(i / 15);
-            }
-            this.showArr = [];
-        },
-        catSelected(ev) {
-            const obj = this.categories.find( el => el.name === ev.target.value);
-            if(obj){                
-                this.$router.push({
-                    name: "products",
-                    params: { category: obj.alias }
-                });
-            }else{
-                this.$router.push({
-                    name: "products",
-                    params: { category: "wszystkie" }
-                });
-            }
-        },
-        changeCategory() {
-            this.keyNum++;
-            this.registeredItems = [];
-
-            const obj = this.categories.find( el => el.alias === this.$route.params.category);
-            if (obj){
-                this.selectedCategory = 1;
-                this.categoryName = obj.name;
-            }else{
-                this.selectedCategory = 0;
-                this.categoryName = "Wszystkie";
-            }
-        },
-
-        searchTextChanged(ev){
-            let tex = ev.target.value;
-            if (tex.length > 1){
-                this.searchArr = this.allProducts.filter( item => {
-                    return (item.description.toLowerCase().includes(tex.toLowerCase()));
-                });
-                if (this.searchArr.length < 1){
-                    this.searchItemWarning = "Brak produktów z frazą: "+tex;
-                }else{
-                    this.searchItemWarning = "";
-                }
-            }else if (tex.length > 0){
-                this.searchArr = [];
-                this.searchItemWarning = "min. 2 znaki";
-            }else{
-                this.searchArr = [];
-                this.searchItemWarning = "";
-            }
-            this.clearSearchButton = tex.length > 0;            
-        },
-        clearSearch(){
-            this.searchArr = [];
-            this.searchItemWarning = "";
-            this.clearSearchButton = false;
-            this.$refs.searchInput.value = "";
-        },
-        openSearchResult(item){
-            this.$router.push({ name: 'product', params: { id: item.product_id }})
+    products: {
+      get() {
+        if (this.selectedCategory === 0) {
+          return this.allProducts;
         }
-        
+        return this.allProducts.filter((el) => el.cat === this.selectedCategory);
+      },
     },
-    watch: {
-        "$route.params.category": {
-            handler: function(category) {
-                this.changeCategory();
-            },
-            deep: true,
-            immediate: true
+    categories() {
+      return JSON.parse(JSON.stringify(this.$store.getters.categories));
+    },
+  },
+  methods: {
+    registerItem(item) {
+      this.registeredItems.push(item);
+    },
+    addVisibleItemId(obj) {
+      if (this.showArr.length == 0) {
+        setTimeout(this.showArrayFilled, 200);
+      }
+      this.showArr.push(obj);
+    },
+    showArrayFilled() {
+      this.showArr.sort((a, b) => (a.index > b.index ? 1 : -1));
+      for (let i = 0; i < this.showArr.length; i++) {
+        const element = this.registeredItems.find(
+          (el) => el.product.product_id === this.showArr[i].id,
+        );
+        element.showMe(i / 15);
+      }
+      this.showArr = [];
+    },
+    catSelected(ev) {
+      const obj = this.categories.find((el) => el.name === ev.target.value);
+      if (obj) {
+        this.$router.push({
+          name: 'products',
+          params: { category: obj.alias },
+        });
+      } else {
+        this.$router.push({
+          name: 'products',
+          params: { category: 'wszystkie' },
+        });
+      }
+    },
+    changeCategory() {
+      this.keyNum++;
+      this.registeredItems = [];
+
+      const obj = this.categories.find((el) => el.alias === this.$route.params.category);
+      if (obj) {
+        this.selectedCategory = 1;
+        this.categoryName = obj.name;
+      } else {
+        this.selectedCategory = 0;
+        this.categoryName = 'Wszystkie';
+      }
+    },
+
+    searchTextChanged(ev) {
+      const tex = ev.target.value;
+      if (tex.length > 1) {
+        this.searchArr = this.allProducts.filter((item) => (item.description.toLowerCase().includes(tex.toLowerCase())));
+        if (this.searchArr.length < 1) {
+          this.searchItemWarning = `Brak produktów z frazą: ${tex}`;
+        } else {
+          this.searchItemWarning = '';
         }
-    }
+      } else if (tex.length > 0) {
+        this.searchArr = [];
+        this.searchItemWarning = 'min. 2 znaki';
+      } else {
+        this.searchArr = [];
+        this.searchItemWarning = '';
+      }
+      this.clearSearchButton = tex.length > 0;
+    },
+    clearSearch() {
+      this.searchArr = [];
+      this.searchItemWarning = '';
+      this.clearSearchButton = false;
+      this.$refs.searchInput.value = '';
+    },
+    openSearchResult(item) {
+      this.$router.push({ name: 'product', params: { id: item.product_id } });
+    },
+
+  },
+  watch: {
+    '$route.params.category': {
+      handler(category) {
+        this.changeCategory();
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
 };
 </script>
 
@@ -203,7 +201,7 @@ $filtersWidth: 250px;
             //position: fixed;
             position: absolute;
             z-index: 800;
-            width: 100%;            
+            width: 100%;
             display: flex;
             flex-flow: row-reverse nowrap;
             padding: 65px $bm 10px $bm;
@@ -257,14 +255,14 @@ select option:hover {
     position: absolute;
     display: flex;
     flex-flow: column nowrap;
-    overflow-y: auto; 
+    overflow-y: auto;
     max-height: calc(100vh - 240px);
     .search-result {
         white-space: nowrap;
         max-width: 90vw;
         min-height: 30px;
         text-overflow: ellipsis;
-        overflow: hidden; 
+        overflow: hidden;
         white-space: nowrap;
         padding: 6px 12px;
         font-size: 12px;
@@ -280,7 +278,7 @@ select option:hover {
             pointer-events: none;
         }
 }
-    
+
 }
 
 .form-group{

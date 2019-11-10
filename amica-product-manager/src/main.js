@@ -10,20 +10,9 @@ import App from './App.vue';
 Vue.use(VueAgile);
 Vue.use(Vue2TouchEvents);
 
-
 axios.defaults.baseURL = 'https://amica-prod.firebaseio.com';
 
-// export const EventBus = new Vue();
-
-/* export const eventBus = new Vue({
-    methods: {
-        setProduct(product) {
-            this.$emit('productChanged', product);
-        }
-    }
-}); */
-
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 Vue.directive('observe-visibility', ObserveVisibility);
 
 new Vue({

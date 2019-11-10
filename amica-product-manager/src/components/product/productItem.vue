@@ -18,38 +18,38 @@
 
 <script>
 export default {
-    name: "productItem",
-    data() {
-        return {
-            isVisible: false,
-            desc: this.product.description.replace(this.product.productName, ""),
-            visibilityChangedRequested: false
-        };
+  name: 'productItem',
+  data() {
+    return {
+      isVisible: false,
+      desc: this.product.description.replace(this.product.productName, ''),
+      visibilityChangedRequested: false,
+    };
+  },
+  props: {
+    product: Object,
+    index: Number,
+  },
+  methods: {
+    visibilityChanged(isVisible, entry) {
+      if (isVisible) {
+        this.$emit('itemVisible', {
+          index: this.index,
+          id: this.product.product_id,
+        });
+      }
     },
-    props: {
-        product: Object,
-        index: Number
+    showMe(delay) {
+      this.$el.style.transitionDelay = `${delay}s`;
+      this.isVisible = true;
     },
-    methods: {
-        visibilityChanged(isVisible, entry) {
-            if (isVisible) {
-                this.$emit("itemVisible", {
-                    index: this.index,
-                    id: this.product.product_id,
-                })
-            }
-        },
-        showMe(delay) {
-            this.$el.style.transitionDelay = delay + "s";
-            this.isVisible = true;
-        },
-        productSelected(){
-            this.$router.push({ name: 'product', params: { id: this.product.product_id }})
-        }
+    productSelected() {
+      this.$router.push({ name: 'product', params: { id: this.product.product_id } });
     },
-    mounted() {
-        this.$emit("registerItem", this);
-    }
+  },
+  mounted() {
+    this.$emit('registerItem', this);
+  },
 };
 </script>
 

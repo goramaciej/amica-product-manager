@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <side-menu @hideMobileMenu="mobOff" @showMobileMenu="mobOn" />
+        <side-menu />
         <main id="page-wrap">
             <navbar />
             <div class="top-spacer">A</div>
@@ -14,32 +14,32 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-import SideMenu from "./components/SideMenu.vue";
+import Navbar from './components/Navbar.vue';
+import SideMenu from './components/SideMenu.vue';
 
 export default {
-    data() {
-        return {
-            mobileMenuVisible: false
-        };
+  data() {
+    return {
+
+    };
+  },
+  computed: {
+    mobileMenuVisible() {
+      return this.$store.getters.mobileMenuVisible;
     },
-    created() {
-        this.$store.dispatch("retrieveCategories");
-        this.$store.dispatch("retrieveFeatures");
-        this.$store.dispatch("retrieveProducts");
-    },
-    components: {
-        Navbar,
-        SideMenu
-    },
-    methods: {
-        mobOff() {
-            this.mobileMenuVisible = false;
-        },
-        mobOn() {
-            this.mobileMenuVisible = true;
-        }
-    }
+  },
+  created() {
+    this.$store.dispatch('retrieveCategories');
+    this.$store.dispatch('retrieveFeatures');
+    this.$store.dispatch('retrieveProducts');
+  },
+  components: {
+    Navbar,
+    SideMenu,
+  },
+  methods: {
+
+  },
 };
 </script>
 

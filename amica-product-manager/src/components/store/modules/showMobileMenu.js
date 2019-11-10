@@ -1,24 +1,31 @@
 const state = {
-    menu: false,
+  menu: false,
 };
 
 const mutations = {
-    SHOW_MENU(state) {
-        state.menu = true;
-    },
-    HIDE_MENU(state) {
-        state.menu = false;
-    },
+  SHOW_MENU(state) {
+    state.menu = true;
+  },
+  HIDE_MENU(state) {
+    state.menu = false;
+  },
 
 };
+const actions = {
+  showMobileMenu({ commit }) {
+    commit('SHOW_MENU');
+  },
+  hideMobileMenu({ commit }) {
+    commit('HIDE_MENU');
+  },
+};
 const getters = {
-    mobileMenuVisible: (state) => {
-        return state.menu;
-    },
+  mobileMenuVisible: (state) => state.menu,
 };
 
 export default {
-    state,
-    mutations,
-    getters,
+  state,
+  mutations,
+  actions,
+  getters,
 };
