@@ -18,8 +18,13 @@ const actions = {
   retrieveProducts({ commit }) {
     axios.get('/products.json')
       .then((response) => {
+        //console.log(response.data);
         const arr = Object.values(response.data);
-        commit('SET_PRODUCTS', arr[arr.length - 1]);
+        const newArr = arr[arr.length - 1];
+        const newArr2 = newArr.filter(el => {
+            return el != null;
+        });
+        commit('SET_PRODUCTS', newArr2);
       })
       .catch((error) => console.log(error));
   },
